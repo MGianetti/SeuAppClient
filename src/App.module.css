@@ -1,0 +1,13 @@
+body {
+  background-color: rgb(240, 242, 245);
+}
+body a {
+  text-decoration: none !important;
+}
+body a:focus {
+  box-shadow: none !important;
+}
+
+*:focus {
+  box-shadow: none !important;
+}
