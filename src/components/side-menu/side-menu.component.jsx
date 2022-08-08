@@ -31,11 +31,14 @@ const SideMenu = props => {
         overflow="hidden"
       >
         <Button
+          w="100%"
+          justifyContent="flex-start"
           pl="8px"
           display="flex"
           alignItems="center"
           mb="16px"
           variant="unstyled"
+          _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiUser h="24px" w="24px" color="white" />}
         >
           <Text ml="16px" color="white">
@@ -43,11 +46,14 @@ const SideMenu = props => {
           </Text>
         </Button>
         <Button
+          w="100%"
+          justifyContent="flex-start"
           pl="8px"
           display="flex"
           alignItems="center"
           mb="16px"
           variant="unstyled"
+          _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiScissors h="24px" w="24px" color="white" />}
         >
           <Text ml="16px" color="white">
@@ -55,11 +61,14 @@ const SideMenu = props => {
           </Text>
         </Button>
         <Button
+          w="100%"
+          justifyContent="flex-start"
           pl="8px"
           display="flex"
           alignItems="center"
           mb="16px"
           variant="unstyled"
+          _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiShoppingBag h="24px" w="24px" color="white" />}
         >
           <Text ml="16px" color="white">
@@ -67,11 +76,14 @@ const SideMenu = props => {
           </Text>
         </Button>
         <Button
+          w="100%"
+          justifyContent="flex-start"
           pl="8px"
           display="flex"
           alignItems="center"
           mb="16px"
           variant="unstyled"
+          _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiUser h="24px" w="24px" color="white" />}
         >
           <Text ml="16px" color="white">
