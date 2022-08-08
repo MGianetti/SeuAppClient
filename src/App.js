@@ -8,7 +8,7 @@ import styles from './App.module.css';
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <LoggedInLayout />
+      <LoggedInLayout></LoggedInLayout>
     </ChakraProvider>
   );
 }

@@ -5,7 +5,7 @@ import Navbar from '../navbar';
 import ContentContainer from '../content-container';
 import SideMenu from '../side-menu';
 
-const LoggedInLayout = () => {
+const LoggedInLayout = ({ children }) => {
   const [isMenuExpanded, setIsMenuExpanded] = useState(false);
 
   const handleMenuExpansion = () => setIsMenuExpanded(true);
@@ -24,7 +24,7 @@ const LoggedInLayout = () => {
           onMouseEnter={handleMenuExpansion}
           onMouseLeave={handleMenuRetraction}
         />
-        <ContentContainer />
+        <ContentContainer>{children}</ContentContainer>
       </Flex>
     </>
   );

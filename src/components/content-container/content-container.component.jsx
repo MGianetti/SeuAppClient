@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Box, Container, Image } from '@chakra-ui/react';
 
-const ContentContainer = () => {
+const ContentContainer = ({ children }) => {
   return (
     <Box w="100%" h="100%">
       <Container
@@ -26,7 +26,9 @@ const ContentContainer = () => {
           top="-384px"
           border="0px solid rgba(0, 0, 0, 0.125)"
           boxShadow="rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem, rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem"
-        ></Box>
+        >
+          {children}
+        </Box>
       </Container>
     </Box>
   );
