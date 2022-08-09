@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
-import { Box, Flex, Button, Text } from '@chakra-ui/react';
+import { Box, Flex, Button, Link } from '@chakra-ui/react';
 
 import { FiUser, FiScissors, FiShoppingBag } from 'react-icons/fi';
+import routes from '../../config/routes';
 
 const SideMenu = props => {
   const { isMenuExpanded, onMouseEnter, onMouseLeave } = props;
@@ -41,10 +42,9 @@ const SideMenu = props => {
           _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiUser h="24px" w="24px" color="white" />}
         >
-          <Text ml="16px" color="white">
-            Clientes
-          </Text>
+          <Link href={routes.clients.root}>Clientes</Link>
         </Button>
+
         <Button
           w="100%"
           justifyContent="flex-start"
@@ -56,9 +56,7 @@ const SideMenu = props => {
           _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiScissors h="24px" w="24px" color="white" />}
         >
-          <Text ml="16px" color="white">
-            Serviços
-          </Text>
+          <Link href={routes.services.root}>Serviços</Link>
         </Button>
         <Button
           w="100%"
@@ -71,9 +69,7 @@ const SideMenu = props => {
           _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiShoppingBag h="24px" w="24px" color="white" />}
         >
-          <Text ml="16px" color="white">
-            Produtos
-          </Text>
+          <Link href={routes.products.root}>Produtos</Link>
         </Button>
         <Button
           w="100%"
@@ -86,9 +82,7 @@ const SideMenu = props => {
           _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiUser h="24px" w="24px" color="white" />}
         >
-          <Text ml="16px" color="white">
-            Profissionais
-          </Text>
+          <Link href={routes.professionals.root}>Profissionais</Link>
         </Button>
       </Flex>
     </Box>
