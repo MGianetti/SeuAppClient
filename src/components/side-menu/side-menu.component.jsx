@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import { Box, Flex, Button, Link } from '@chakra-ui/react';
+import { Box, Flex, Button } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 import { FiUser, FiScissors, FiShoppingBag } from 'react-icons/fi';
 import routes from '../../config/routes';
@@ -42,7 +43,7 @@ const SideMenu = props => {
           _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiUser h="24px" w="24px" color="white" />}
         >
-          <Link href={routes.clients.root}>Clientes</Link>
+          <Link to={routes.clients.root}>Clientes</Link>
         </Button>
 
         <Button
@@ -56,7 +57,7 @@ const SideMenu = props => {
           _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiScissors h="24px" w="24px" color="white" />}
         >
-          <Link href={routes.services.root}>Serviços</Link>
+          <Link to={routes.services.root}>Serviços</Link>
         </Button>
         <Button
           w="100%"
@@ -69,7 +70,7 @@ const SideMenu = props => {
           _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiShoppingBag h="24px" w="24px" color="white" />}
         >
-          <Link href={routes.products.root}>Produtos</Link>
+          <Link to={routes.products.root}>Produtos</Link>
         </Button>
         <Button
           w="100%"
@@ -82,7 +83,7 @@ const SideMenu = props => {
           _hover={{ background: 'rgb(166, 166, 174, 0.4)' }}
           leftIcon={<FiUser h="24px" w="24px" color="white" />}
         >
-          <Link href={routes.professionals.root}>Profissionais</Link>
+          <Link to={routes.professionals.root}>Profissionais</Link>
         </Button>
       </Flex>
     </Box>

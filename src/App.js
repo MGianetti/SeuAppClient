@@ -28,7 +28,7 @@ function App() {
               element={<Professional />}
             />
             <Route exact path={routes.services.root} element={<Services />} />
-            <Route path={routes.notFound} element={<NotFound />} />
+            <Route path={routes.notFound} render={<NotFound />} />
           </Routes>
         </LoggedInLayout>
       </ChakraProvider>
