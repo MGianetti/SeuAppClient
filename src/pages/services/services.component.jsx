@@ -1,99 +1,68 @@
 import React, { memo, useState } from 'react';
 
 import {
-  Button,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Heading,
+  FormLabel,
+  Text,
+  Flex,
+  Button,
   Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Textarea,
 } from '@chakra-ui/react';
+
 import {
-  SERVICE_ATTRIBUTES_LABEL,
-  SERVICE_ERROR,
-  SERVICE_PAGE_DESCRIPTION,
-  SERVICE_PAGE_TITLE,
-  SERVICE_TIPS_LABEL,
+  NEW_SERVICE_BUTTON,
+  VIEW_SERVICES_DESCRIPTION,
+  VIEW_SERVICES_PAGE_TITLE,
+  SERVICE_MODAL_TITLE,
+  SERVICE_MODAL_CANCEL,
+  SERVICE_MODAL_ACTION_LABEL,
+  servicesColumns,
+  servicesMockData,
 } from './services.constants';
-import { CREATE_BUTTON_LABEL } from '../pages.constants';
+
+import { FiPlus } from 'react-icons/fi';
+
+import NewService from './new';
+import { Pagination, Table, Modal } from '../../components';
 
 function Services() {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleNameChange = e => setName(e.target.value);
-  const handlePriceChange = e => setPrice(e.target.value);
-  const handleDescriptionChange = e => setDescription(e.target.value);
-
-  // TODO Make error checking handler
-  const isErrorName = false;
-  const isErrorPrice = false;
-  const isErrorDescription = false;
-
+  const handleModalClose = () => setIsModalOpen(false);
+  const handleModalOpen = () => setIsModalOpen(true);
   return (
     <>
-      <Heading w="65%" minW="512px">
-        {SERVICE_PAGE_TITLE}
-      </Heading>
-      <FormLabel ml="16px" minW="512px" w="65%">
-        {SERVICE_PAGE_DESCRIPTION}
+      <Modal
+        onModalClose={handleModalClose}
+        isModalOpen={isModalOpen}
+        modalTitle={SERVICE_MODAL_TITLE}
+        closeButtonLabel={SERVICE_MODAL_CANCEL}
+        actionLabel={SERVICE_MODAL_ACTION_LABEL}
+        modalSize="2xl"
+      >
+        <NewService />
+      </Modal>
+      <Button
+        leftIcon={<FiPlus />}
+        alignSelf="flex-start"
+        mb="16px"
+        onClick={handleModalOpen}
+      >
+        {NEW_SERVICE_BUTTON}
+      </Button>
+      <Flex justifyContent="space-between" w="100%">
+        <Heading w="100%" minW="512px" as="h1" size="lg">
+          {VIEW_SERVICES_PAGE_TITLE}
+        </Heading>
+        <Input placeholder="Buscar cliente" maxWidth="256px" />
+      </Flex>
+      <FormLabel minW="512px" w="100%" ml="16px">
+        {VIEW_SERVICES_DESCRIPTION}
       </FormLabel>
-      <Flex flexDir="column" w="65%" minW="512px">
-        <Flex marginTop="32px">
-          <FormControl mr="64px" isRequired isInvalid={isErrorName}>
-            <FormLabel>{SERVICE_ATTRIBUTES_LABEL.NAME}</FormLabel>
-            <Input type="text" value={name} onChange={handleNameChange} />
-            {!isErrorName ? (
-              <FormHelperText>{SERVICE_TIPS_LABEL.NAME}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{SERVICE_ERROR.NAME}</FormErrorMessage>
-            )}
-          </FormControl>
-          <FormControl isRequired isInvalid={isErrorPrice}>
-            <FormLabel>{SERVICE_ATTRIBUTES_LABEL.PRICE}</FormLabel>
-            <NumberInput
-              allowMouseWheel
-              value={price}
-              onChange={handlePriceChange}
-            >
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-            {!isErrorPrice ? (
-              <FormHelperText>{SERVICE_TIPS_LABEL.PRICE}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{SERVICE_ERROR.PRICE}</FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-
-        <Flex marginTop="32px" w="100%" alignSelf="center">
-          <FormControl isInvalid={isErrorDescription}>
-            <FormLabel>{SERVICE_ATTRIBUTES_LABEL.DESCRIPTION}</FormLabel>
-            <Textarea value={description} onChange={handleDescriptionChange} />
-            {!isErrorDescription ? (
-              <FormHelperText>{SERVICE_TIPS_LABEL.DESCRIPTION}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{SERVICE_ERROR.DESCRIPTION}</FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-
-        <Flex w="100%" justifyContent="flex-end" mt="32px">
-          <Button>{CREATE_BUTTON_LABEL}</Button>
-        </Flex>
+      <Table columns={servicesColumns} data={servicesMockData} />
+      <Flex justifyContent="space-between" w="98%" mt="32px">
+        <Text>Mostrando de 1 até 10 de 6.079 registros</Text>
+        <Pagination />
       </Flex>
     </>
   );

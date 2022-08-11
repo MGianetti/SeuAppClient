@@ -40,7 +40,7 @@ function NewClient() {
 
   return (
     <>
-      <Heading w="auto" minW="512px">
+      <Heading w="auto" minW="512px" as="h1" size="lg">
         {CLIENT_PAGE_TITLE}
       </Heading>
       <Flex flexDir="column" w="auto" minW="512px">
