@@ -1,160 +1,71 @@
 import React, { memo, useState } from 'react';
 
 import {
-  Button,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Heading,
+  FormLabel,
+  Text,
+  Flex,
+  Button,
   Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Select,
-  Slider,
-  SliderFilledTrack,
-  SliderThumb,
-  SliderTrack,
 } from '@chakra-ui/react';
 
+import { FiPlus } from 'react-icons/fi';
+
+import NewClient from './new';
+import { Pagination, Table, Modal } from '../../components';
+
 import {
-  CLIENT_PAGE_DESCRIPTION,
-  CLIENT_PAGE_TITLE,
-  CLIENT_ATTRIBUTES_LABEL,
-  CLIENT_TIPS_LABEL,
-  CLIENT_ERROR,
-  SEX_PLACEHOLDER,
-  SEX_OPTIONS,
+  NEW_CLIENT_BUTTON,
+  VIEW_CLIENTS_DESCRIPTION,
+  VIEW_CLIENTS_PAGE_TITLE,
+  CLIENT_MODAL_TITLE,
+  CLIENT_MODAL_CANCEL,
+  CLIENT_MODAL_ACTION_LABEL,
+  clientColumn,
+  clientMockData,
 } from './clients.constants';
 
-import { CREATE_BUTTON_LABEL } from '../pages.constants';
+function ClientsVisualization() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-function Client() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [cellphone, setCellphone] = useState('');
-  const [sex, setSex] = useState();
-  const [age, setAge] = useState(30);
-
-  const handleEmailChange = e => setEmail(e.target.value);
-  const handleNameChange = e => setName(e.target.value);
-  const handleCellphoneChange = e => setCellphone(e.target.value);
-  const handleSexChange = e => setSex(e.target.value);
-  const handleAgeChange = age => setAge(age);
-
-  // TODO Make error checking handler
-  const isErrorEmail = false;
-  const isErrorName = false;
-  const isErrorCellphone = false;
-  const isErrorSex = false;
-  const isErrorAge = false;
+  const handleModalClose = () => setIsModalOpen(false);
+  const handleModalOpen = () => setIsModalOpen(true);
 
   return (
     <>
-      <Heading w="65%" minW="512px">
-        {CLIENT_PAGE_TITLE}
-      </Heading>
-      <FormLabel ml="16px" minW="512px" w="65%">
-        {CLIENT_PAGE_DESCRIPTION}
+      <Modal
+        onModalClose={handleModalClose}
+        isModalOpen={isModalOpen}
+        modalTitle={CLIENT_MODAL_TITLE}
+        closeButtonLabel={CLIENT_MODAL_CANCEL}
+        actionLabel={CLIENT_MODAL_ACTION_LABEL}
+      >
+        <NewClient />
+      </Modal>
+      <Button
+        leftIcon={<FiPlus />}
+        alignSelf="flex-start"
+        mb="16px"
+        onClick={handleModalOpen}
+      >
+        {NEW_CLIENT_BUTTON}
+      </Button>
+      <Flex justifyContent="space-between" w="100%">
+        <Heading w="100%" minW="512px" as="h1" size="lg">
+          {VIEW_CLIENTS_PAGE_TITLE}
+        </Heading>
+        <Input placeholder="Buscar cliente" maxWidth="256px" />
+      </Flex>
+      <FormLabel minW="512px" w="100%" ml="16px">
+        {VIEW_CLIENTS_DESCRIPTION}
       </FormLabel>
-      <Flex flexDir="column" w="65%" minW="512px">
-        <Flex marginTop="32px">
-          <FormControl mr="64px" isRequired isInvalid={isErrorName}>
-            <FormLabel>{CLIENT_ATTRIBUTES_LABEL.NAME}</FormLabel>
-            <Input type="text" value={name} onChange={handleNameChange} />
-            {!isErrorName ? (
-              <FormHelperText>{CLIENT_TIPS_LABEL.NAME}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{CLIENT_ERROR.NAME}</FormErrorMessage>
-            )}
-          </FormControl>
-          <FormControl isRequired isInvalid={isErrorEmail}>
-            <FormLabel>{CLIENT_ATTRIBUTES_LABEL.EMAIL}</FormLabel>
-            <Input type="email" value={email} onChange={handleEmailChange} />
-            {!isErrorEmail ? (
-              <FormHelperText>{CLIENT_TIPS_LABEL.EMAIL}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{CLIENT_ERROR.EMAIL}</FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-        <Flex marginTop="32px">
-          <FormControl mr="64px" isRequired isInvalid={isErrorName}>
-            <FormLabel>{CLIENT_ATTRIBUTES_LABEL.CELLPHONE}</FormLabel>
-            <Input
-              type="tel"
-              value={cellphone}
-              onChange={handleCellphoneChange}
-            />
-            {!isErrorCellphone ? (
-              <FormHelperText>{CLIENT_TIPS_LABEL.CELLPHONE}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{CLIENT_ERROR.CELLPHONE}</FormErrorMessage>
-            )}
-          </FormControl>
-          <FormControl isInvalid={isErrorSex}>
-            <FormLabel>{CLIENT_ATTRIBUTES_LABEL.SEX}</FormLabel>
-            <Select
-              value={sex}
-              placeholder={SEX_PLACEHOLDER}
-              onChange={handleSexChange}
-            >
-              <option>{SEX_OPTIONS.MALE}</option>
-              <option>{SEX_OPTIONS.FEMALE}</option>
-            </Select>
-            {!isErrorCellphone ? (
-              <FormHelperText>{CLIENT_TIPS_LABEL.SEX}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{CLIENT_ERROR.SEX}</FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-        <Flex marginTop="32px" w="50%" alignSelf="center">
-          <FormControl isInvalid={isErrorAge}>
-            <FormLabel>{CLIENT_ATTRIBUTES_LABEL.AGE}</FormLabel>
-            <Flex>
-              <NumberInput
-                maxW="100px"
-                mr="2rem"
-                value={age}
-                onChange={handleAgeChange}
-                max={120}
-              >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-              <Slider
-                flex="1"
-                focusThumbOnChange={false}
-                value={age}
-                onChange={handleAgeChange}
-              >
-                <SliderTrack max={120}>
-                  <SliderFilledTrack />
-                </SliderTrack>
-                <SliderThumb fontSize="sm" boxSize="32px" children={age} />
-              </Slider>
-            </Flex>
-            {!isErrorAge ? (
-              <FormHelperText>{CLIENT_TIPS_LABEL.AGE}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{CLIENT_ERROR.AGE}</FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-        <Flex w="100%" justifyContent="flex-end" mt="32px">
-          <Button>{CREATE_BUTTON_LABEL}</Button>
-        </Flex>
+      <Table columns={clientColumn} data={clientMockData} />
+      <Flex justifyContent="space-between" w="98%" mt="32px">
+        <Text>Mostrando de 1 até 10 de 6.079 registros</Text>
+        <Pagination />
       </Flex>
     </>
   );
 }
 
-export default memo(Client);
+export default memo(ClientsVisualization);

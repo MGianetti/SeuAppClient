@@ -6,7 +6,15 @@ import {
 
 export const CLIENT_PAGE_TITLE = 'Novo cliente:';
 export const CLIENT_PAGE_DESCRIPTION = 'Cadastre um novo cliente.';
+export const VIEW_CLIENTS_PAGE_TITLE = 'Clientes:';
+export const VIEW_CLIENTS_DESCRIPTION = 'Consulta de clientes.';
+export const NEW_CLIENT_BUTTON = 'Cliente';
+
 export const SEX_PLACEHOLDER = 'Selecione o sexo';
+
+export const CLIENT_MODAL_TITLE = 'Cadastre um novo cliente';
+export const CLIENT_MODAL_CANCEL = 'Cancelar';
+export const CLIENT_MODAL_ACTION_LABEL = 'Cadastrar';
 
 export const CLIENT_KEYS = Object.freeze({
   NAME: 'NAME',
@@ -74,3 +82,79 @@ export const SEX_OPTIONS = Object.freeze({
   MALE: 'Masculino',
   FEMALE: 'Feminino',
 });
+
+export const clientMockData = [
+  {
+    name: 'Mateus',
+    email: 'mateus@gmail.com',
+    cellphone: '(12) 98888-7777',
+    sex: 'Masculino',
+    age: 26,
+  },
+  {
+    name: 'Mateus',
+    email: 'mateus@gmail.com',
+    cellphone: '(12) 98888-7777',
+    sex: 'Masculino',
+    age: 26,
+  },
+  {
+    name: 'Mateus',
+    email: 'mateus@gmail.com',
+    cellphone: '(12) 98888-7777',
+    sex: 'Masculino',
+    age: 26,
+  },
+  {
+    name: 'Mateus',
+    email: 'mateus@gmail.com',
+    cellphone: '(12) 98888-7777',
+    sex: 'Masculino',
+    age: 36,
+  },
+  {
+    name: 'Mateus',
+    email: 'mateus@gmail.com',
+    cellphone: '(12) 98888-7777',
+    sex: 'Masculino',
+    age: 26,
+  },
+  {
+    name: 'Mateus',
+    email: 'mateus@gmail.com',
+    cellphone: '(12) 98888-7777',
+    sex: 'Masculino',
+    age: 56,
+  },
+  {
+    name: 'Mateus',
+    email: 'mateus@gmail.com',
+    cellphone: '(12) 98888-7777',
+    sex: 'Masculino',
+    age: 276,
+  },
+];
+
+export const clientColumn = [
+  {
+    Header: 'Nome',
+    accessor: 'name',
+  },
+  {
+    Header: 'Email',
+    accessor: 'email',
+  },
+  {
+    Header: 'Celular',
+    accessor: 'cellphone',
+  },
+  {
+    Header: 'Sexo',
+    accessor: 'sex',
+  },
+  {
+    Header: 'Idade',
+    accessor: 'age',
+    isNumeric: true,
+  },
+];
