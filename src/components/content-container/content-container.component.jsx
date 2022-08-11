@@ -11,7 +11,7 @@ const ContentContainer = ({ children }) => {
         flexDirection="column"
       >
         <Image
-          src="Barber.jpg"
+          src="../Barber.jpg"
           borderRadius="16px"
           fit="cover"
           h="512px"

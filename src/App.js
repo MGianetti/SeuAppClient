@@ -4,8 +4,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import LoggedInLayout from './components/logged-in-layout';
 
-import Clients from './pages/clients';
 import Products from './pages/products';
+import Clients from './pages/clients/clients.component';
 import Professional from './pages/professionals';
 import Services from './pages/services';
 import NotFound from './pages/not-found';
