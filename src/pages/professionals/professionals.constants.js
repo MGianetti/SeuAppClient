@@ -8,7 +8,7 @@ export const PROFESSIONAL_PAGE_TITLE = 'Novo profissional:';
 export const PROFESSIONAL_PAGE_DESCRIPTION = 'Cadastre um novo profissional.';
 export const VIEW_PROFESSIONALS_PAGE_TITLE = 'Profissionais:';
 export const VIEW_PROFESSIONALS_DESCRIPTION = 'Consulta de profissionais.';
-export const NEW_PROFESSIONAL_BUTTON = 'Profissional';
+export const NEW_PROFESSIONAL_BUTTON = 'Novo';
 
 export const SEARCH_PROFESSIONAL_PRACEHOLDER = 'Profissional';
 export const SEX_PLACEHOLDER = 'Selecione o sexo';

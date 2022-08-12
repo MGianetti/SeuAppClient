@@ -4,7 +4,7 @@ export const SERVICE_PAGE_TITLE = 'Novo serviço:';
 export const SERVICE_PAGE_DESCRIPTION = 'Cadastre um novo serviço.';
 export const VIEW_SERVICES_PAGE_TITLE = 'Serviços:';
 export const VIEW_SERVICES_DESCRIPTION = 'Consulta de serviços.';
-export const NEW_SERVICE_BUTTON = 'Serviço';
+export const NEW_SERVICE_BUTTON = 'Novo';
 
 export const SEARCH_SERVICE_PLACEHOLDER = 'Buscar serviço';
 

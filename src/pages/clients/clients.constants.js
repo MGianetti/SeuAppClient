@@ -8,7 +8,7 @@ export const CLIENT_PAGE_TITLE = 'Novo cliente:';
 export const CLIENT_PAGE_DESCRIPTION = 'Cadastre um novo cliente.';
 export const VIEW_CLIENTS_PAGE_TITLE = 'Clientes:';
 export const VIEW_CLIENTS_DESCRIPTION = 'Consulta de clientes.';
-export const NEW_CLIENT_BUTTON = 'Cliente';
+export const NEW_CLIENT_BUTTON = 'Novo';
 
 export const SEX_PLACEHOLDER = 'Selecione o sexo';
 
