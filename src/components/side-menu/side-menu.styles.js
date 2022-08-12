@@ -1,8 +1,6 @@
 import { SIDE_MENU_ITEMS_ICONS } from './side-menu.constants';
 
 export const itemMenuButtonStyles = ({ menuItemKey, isMenuItemSelected }) => {
-  const hoverBackground = !isMenuItemSelected && 'rgb(166, 166, 174, 0.4)';
-
   const iconColor = isMenuItemSelected
     ? { color: 'azure' }
     : { color: 'lightGray' };
@@ -17,7 +15,7 @@ export const itemMenuButtonStyles = ({ menuItemKey, isMenuItemSelected }) => {
     alignItems: 'center',
     mb: '16px',
     variant: 'unstyled',
-    _hover: { background: hoverBackground },
+    _hover: { background: 'rgb(166, 166, 174, 0.4)' },
     leftIcon,
   };
 };
