@@ -11,13 +11,14 @@ import {
 
 import {
   NEW_SERVICE_BUTTON,
-  VIEW_SERVICES_DESCRIPTION,
-  VIEW_SERVICES_PAGE_TITLE,
-  SERVICE_MODAL_TITLE,
-  SERVICE_MODAL_CANCEL,
+  SEARCH_SERVICE_PLACEHOLDER,
   SERVICE_MODAL_ACTION_LABEL,
+  SERVICE_MODAL_CANCEL,
+  SERVICE_MODAL_TITLE,
   servicesColumns,
   servicesMockData,
+  VIEW_SERVICES_DESCRIPTION,
+  VIEW_SERVICES_PAGE_TITLE,
 } from './services.constants';
 
 import { FiPlus } from 'react-icons/fi';
@@ -54,7 +55,7 @@ function Services() {
         <Heading w="100%" minW="512px" as="h1" size="lg">
           {VIEW_SERVICES_PAGE_TITLE}
         </Heading>
-        <Input placeholder="Buscar cliente" maxWidth="256px" />
+        <Input placeholder={SEARCH_SERVICE_PLACEHOLDER} maxWidth="256px" />
       </Flex>
       <FormLabel minW="512px" w="100%" ml="16px">
         {VIEW_SERVICES_DESCRIPTION}

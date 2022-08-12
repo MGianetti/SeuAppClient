@@ -6,6 +6,8 @@ export const VIEW_SERVICES_PAGE_TITLE = 'Serviços:';
 export const VIEW_SERVICES_DESCRIPTION = 'Consulta de serviços.';
 export const NEW_SERVICE_BUTTON = 'Serviço';
 
+export const SEARCH_SERVICE_PLACEHOLDER = 'Buscar serviço';
+
 export const SERVICE_MODAL_TITLE = 'Cadastre um novo serviço';
 export const SERVICE_MODAL_CANCEL = 'Cancelar';
 export const SERVICE_MODAL_ACTION_LABEL = 'Cadastrar';
