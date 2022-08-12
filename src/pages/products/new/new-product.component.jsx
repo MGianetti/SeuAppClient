@@ -41,22 +41,22 @@ const NewProduct = () => {
 
   return (
     <>
-      <Heading w="65%" minW="512px">
+      <Heading w="auto" minW="512px" as="h1" size="lg">
         {PRODUCT_PAGE_TITLE}
       </Heading>
-      <Flex flexDir="column" w="65%" minW="512px">
+      <Flex flexDir="column" minW="512px">
         <Flex marginTop="32px">
           <FormControl mr="64px" isRequired isInvalid={isErrorDescription}>
-            <FormLabel>{PRODUCT_ATTRIBUTES_LABEL.NAME}</FormLabel>
+            <FormLabel>{PRODUCT_ATTRIBUTES_LABEL.DESCRIPTION}</FormLabel>
             <Input
               type="text"
               value={description}
               onChange={handleDescriptionChange}
             />
             {!isErrorDescription ? (
-              <FormHelperText>{PRODUCT_TIPS_LABEL.NAME}</FormHelperText>
+              <FormHelperText>{PRODUCT_TIPS_LABEL.DESCRIPTION}</FormHelperText>
             ) : (
-              <FormErrorMessage>{PRODUCT_ERROR.NAME}</FormErrorMessage>
+              <FormErrorMessage>{PRODUCT_ERROR.DESCRIPTION}</FormErrorMessage>
             )}
           </FormControl>
           <FormControl
@@ -80,8 +80,8 @@ const NewProduct = () => {
           </FormControl>
         </Flex>
 
-        <Flex marginTop="32px" w="50%" alignSelf="self-start">
-          <FormControl isInvalid={isErrorCategory}>
+        <Flex marginTop="32px" w="50%">
+          <FormControl isInvalid={isErrorCategory} mr="32px">
             <FormLabel>{PRODUCT_ATTRIBUTES_LABEL.CATEGORY}</FormLabel>
             <Select
               value={category}

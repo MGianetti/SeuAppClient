@@ -23,7 +23,7 @@ import {
 
 import { FiPlus } from 'react-icons/fi';
 
-import NewService from './new';
+import NewProduct from './new';
 import { Pagination, Table, Modal } from '../../components';
 
 function Products() {
@@ -39,9 +39,8 @@ function Products() {
         modalTitle={PRODUCT_MODAL_TITLE}
         closeButtonLabel={PRODUCT_MODAL_CANCEL}
         actionLabel={PRODUCT_MODAL_ACTION_LABEL}
-        modalSize="2xl"
       >
-        <NewService />
+        <NewProduct />
       </Modal>
       <Button
         leftIcon={<FiPlus />}

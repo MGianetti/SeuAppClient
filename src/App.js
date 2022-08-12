@@ -6,7 +6,7 @@ import LoggedInLayout from './components/logged-in-layout';
 
 import Products from './pages/products';
 import Clients from './pages/clients/clients.component';
-import Professional from './pages/professionals';
+import Professionals from './pages/professionals';
 import Services from './pages/services';
 import NotFound from './pages/not-found';
 
@@ -25,7 +25,7 @@ function App() {
             <Route
               exact
               path={routes.professionals.root}
-              element={<Professional />}
+              element={<Professionals />}
             />
             <Route exact path={routes.services.root} element={<Services />} />
             <Route path={routes.notFound} render={<NotFound />} />

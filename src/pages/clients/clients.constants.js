@@ -16,6 +16,8 @@ export const CLIENT_MODAL_TITLE = 'Cadastre um novo cliente';
 export const CLIENT_MODAL_CANCEL = 'Cancelar';
 export const CLIENT_MODAL_ACTION_LABEL = 'Cadastrar';
 
+export const SEARCH_CLIENT_PLACEHOLDER = 'Buscar cliente';
+
 export const CLIENT_KEYS = Object.freeze({
   NAME: 'NAME',
   EMAIL: 'EMAIL',

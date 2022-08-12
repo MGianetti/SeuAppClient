@@ -21,11 +21,12 @@ import {
   CLIENT_MODAL_TITLE,
   CLIENT_MODAL_CANCEL,
   CLIENT_MODAL_ACTION_LABEL,
+  SEARCH_CLIENT_PLACEHOLDER,
   clientColumn,
   clientMockData,
 } from './clients.constants';
 
-function ClientsVisualization() {
+function Clients() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalClose = () => setIsModalOpen(false);
@@ -54,7 +55,7 @@ function ClientsVisualization() {
         <Heading w="100%" minW="512px" as="h1" size="lg">
           {VIEW_CLIENTS_PAGE_TITLE}
         </Heading>
-        <Input placeholder="Buscar cliente" maxWidth="256px" />
+        <Input placeholder={SEARCH_CLIENT_PLACEHOLDER} maxWidth="256px" />
       </Flex>
       <FormLabel minW="512px" w="100%" ml="16px">
         {VIEW_CLIENTS_DESCRIPTION}
@@ -68,4 +69,4 @@ function ClientsVisualization() {
   );
 }
 
-export default memo(ClientsVisualization);
+export default memo(Clients);
