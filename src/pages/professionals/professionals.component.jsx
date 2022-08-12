@@ -1,139 +1,72 @@
 import React, { memo, useState } from 'react';
 
 import {
-  Button,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Heading,
+  FormLabel,
+  Text,
+  Flex,
+  Button,
   Input,
 } from '@chakra-ui/react';
+
+import { FiPlus } from 'react-icons/fi';
+
+import NewProfessional from './new';
+import { Pagination, Table, Modal } from '../../components';
+
 import {
-  PROFESSIONAL_ATTRIBUTES_LABEL,
-  PROFESSIONAL_ERROR,
-  PROFESSIONAL_PAGE_DESCRIPTION,
-  PROFESSIONAL_PAGE_TITLE,
-  PROFESSIONAL_TIPS_LABEL,
+  NEW_PROFESSIONAL_BUTTON,
+  VIEW_PROFESSIONALS_DESCRIPTION,
+  VIEW_PROFESSIONALS_PAGE_TITLE,
+  PROFESSIONAL_MODAL_TITLE,
+  PROFESSIONAL_MODAL_CANCEL,
+  PROFESSIONAL_MODAL_ACTION_LABEL,
+  SEARCH_PROFESSIONAL_PRACEHOLDER,
+  professionalsColumns,
+  professionalsMockData,
 } from './professionals.constants';
-import { CREATE_BUTTON_LABEL } from '../pages.constants';
 
-function Client() {
-  const [name, setName] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [cnpj, setCnpj] = useState('');
-  const [cellphone, setCellphone] = useState();
-  const [email, setEmail] = useState(30);
+function Professionals() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleNameChange = e => setName(e.target.value);
-  const handleNicknameChange = e => setNickname(e.target.value);
-  const handleCpfChange = e => setCpf(e.target.value);
-  const handleCnpjChange = e => setCnpj(e.target.value);
-  const handleCellphoneChange = e => setCellphone(e.target.value);
-  const handleEmailChange = e => setEmail(e.target.value);
-
-  // TODO Make error checking handler
-  const isErrorName = false;
-  const isErrorNickname = false;
-  const isErrorCpf = false;
-  const isErrorCnpj = false;
-  const isErrorCellphone = false;
-  const isErrorEmail = false;
+  const handleModalClose = () => setIsModalOpen(false);
+  const handleModalOpen = () => setIsModalOpen(true);
 
   return (
     <>
-      <Heading w="65%" minW="512px">
-        {PROFESSIONAL_PAGE_TITLE}
-      </Heading>
-      <FormLabel ml="16px" minW="512px" w="65%">
-        {PROFESSIONAL_PAGE_DESCRIPTION}
+      <Modal
+        onModalClose={handleModalClose}
+        isModalOpen={isModalOpen}
+        modalTitle={PROFESSIONAL_MODAL_TITLE}
+        closeButtonLabel={PROFESSIONAL_MODAL_CANCEL}
+        actionLabel={PROFESSIONAL_MODAL_ACTION_LABEL}
+      >
+        <NewProfessional />
+      </Modal>
+      <Button
+        leftIcon={<FiPlus />}
+        alignSelf="flex-start"
+        mb="16px"
+        onClick={handleModalOpen}
+      >
+        {NEW_PROFESSIONAL_BUTTON}
+      </Button>
+      <Flex justifyContent="space-between" w="100%">
+        <Heading w="100%" minW="512px" as="h1" size="lg">
+          {VIEW_PROFESSIONALS_PAGE_TITLE}
+        </Heading>
+        <Input placeholder={SEARCH_PROFESSIONAL_PRACEHOLDER} maxWidth="256px" />
+      </Flex>
+      <FormLabel minW="512px" w="100%" ml="16px">
+        {VIEW_PROFESSIONALS_DESCRIPTION}
       </FormLabel>
-      <Flex flexDir="column" w="65%" minW="512px">
-        <Flex marginTop="32px">
-          <FormControl mr="64px" isRequired isInvalid={isErrorName}>
-            <FormLabel>{PROFESSIONAL_ATTRIBUTES_LABEL.NAME}</FormLabel>
-            <Input type="text" value={name} onChange={handleNameChange} />
-            {!isErrorName ? (
-              <FormHelperText>{PROFESSIONAL_TIPS_LABEL.NAME}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{PROFESSIONAL_ERROR.NAME}</FormErrorMessage>
-            )}
-          </FormControl>
-          <FormControl isRequired isInvalid={isErrorNickname}>
-            <FormLabel>{PROFESSIONAL_ATTRIBUTES_LABEL.NICK_NAME}</FormLabel>
-            <Input
-              type="text"
-              value={nickname}
-              onChange={handleNicknameChange}
-            />
-            {!isErrorNickname ? (
-              <FormHelperText>
-                {PROFESSIONAL_TIPS_LABEL.NICK_NAME}
-              </FormHelperText>
-            ) : (
-              <FormErrorMessage>
-                {PROFESSIONAL_ERROR.NICK_NAME}
-              </FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-        <Flex marginTop="32px">
-          <FormControl mr="64px" isRequired isInvalid={isErrorCpf}>
-            <FormLabel>{PROFESSIONAL_ATTRIBUTES_LABEL.CPF}</FormLabel>
-            <Input type="tel" value={cpf} onChange={handleCpfChange} />
-            {!isErrorCpf ? (
-              <FormHelperText>{PROFESSIONAL_TIPS_LABEL.CPF}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{PROFESSIONAL_ERROR.CPF}</FormErrorMessage>
-            )}
-          </FormControl>
-          <FormControl isRequired isInvalid={isErrorCnpj}>
-            <FormLabel>{PROFESSIONAL_ATTRIBUTES_LABEL.CNPJ}</FormLabel>
-            <Input type="email" value={cnpj} onChange={handleCnpjChange} />
-            {!isErrorCnpj ? (
-              <FormHelperText>{PROFESSIONAL_TIPS_LABEL.CNPJ}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{PROFESSIONAL_ERROR.CNPJ}</FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-        <Flex marginTop="32px">
-          <FormControl mr="64px" isRequired isInvalid={isErrorCellphone}>
-            <FormLabel>{PROFESSIONAL_ATTRIBUTES_LABEL.CELLPHONE}</FormLabel>
-            <Input
-              type="tel"
-              value={cellphone}
-              onChange={handleCellphoneChange}
-            />
-            {!isErrorCellphone ? (
-              <FormHelperText>
-                {PROFESSIONAL_TIPS_LABEL.CELLPHONE}
-              </FormHelperText>
-            ) : (
-              <FormErrorMessage>
-                {PROFESSIONAL_ERROR.CELLPHONE}
-              </FormErrorMessage>
-            )}
-          </FormControl>
-          <FormControl isRequired isInvalid={isErrorEmail}>
-            <FormLabel>{PROFESSIONAL_ATTRIBUTES_LABEL.EMAIL}</FormLabel>
-            <Input type="email" value={email} onChange={handleEmailChange} />
-            {!isErrorEmail ? (
-              <FormHelperText>{PROFESSIONAL_TIPS_LABEL.EMAIL}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{PROFESSIONAL_ERROR.EMAIL}</FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-
-        <Flex w="100%" justifyContent="flex-end" mt="32px">
-          <Button>{CREATE_BUTTON_LABEL}</Button>
-        </Flex>
+      <Table columns={professionalsColumns} data={professionalsMockData} />
+      <Flex justifyContent="space-between" w="98%" mt="32px">
+        <Text>Mostrando de 1 até 10 de 6.079 registros</Text>
+        <Pagination />
       </Flex>
     </>
   );
 }
 
-export default memo(Client);
+export default memo(Professionals);
