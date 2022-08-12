@@ -1,127 +1,72 @@
 import React, { memo, useState } from 'react';
 
 import {
-  Button,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Heading,
+  FormLabel,
+  Text,
+  Flex,
+  Button,
   Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Select,
-  Textarea,
 } from '@chakra-ui/react';
+
 import {
-  CATEGORY_PLACEHOLDER,
-  PRODUCT_ATTRIBUTES_LABEL,
-  PRODUCT_ERROR,
-  PRODUCT_PAGE_DESCRIPTION,
-  PRODUCT_PAGE_TITLE,
-  PRODUCT_TIPS_LABEL,
+  NEW_PRODUCT_BUTTON,
+  VIEW_PRODUCTS_DESCRIPTION,
+  VIEW_PRODUCTS_PAGE_TITLE,
+  PRODUCT_MODAL_TITLE,
+  PRODUCT_MODAL_CANCEL,
+  PRODUCT_MODAL_ACTION_LABEL,
+  productsColumns,
+  productsMockData,
+  SEARCH_PRODUCT_PLACEHOLDER,
 } from './products.constants';
-import { CREATE_BUTTON_LABEL } from '../pages.constants';
 
-function Client() {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [category, setCategory] = useState('');
-  const [description, setDescription] = useState('');
+import { FiPlus } from 'react-icons/fi';
 
-  const handleNameChange = e => setName(e.target.value);
-  const handlePriceChange = e => setPrice(e.target.value);
-  const handleCategoryChange = e => setCategory(e.target.value);
-  const handleDescriptionChange = e => setDescription(e.target.value);
+import NewService from './new';
+import { Pagination, Table, Modal } from '../../components';
 
-  // TODO Make error checking handler
+function Products() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const isErrorName = false;
-  const isErrorPrice = false;
-  const isErrorCategory = false;
-  const isErrorDescription = false;
-
+  const handleModalClose = () => setIsModalOpen(false);
+  const handleModalOpen = () => setIsModalOpen(true);
   return (
     <>
-      <Heading w="65%" minW="512px">
-        {PRODUCT_PAGE_TITLE}
-      </Heading>
-      <FormLabel ml="16px" minW="512px" w="65%">
-        {PRODUCT_PAGE_DESCRIPTION}
+      <Modal
+        onModalClose={handleModalClose}
+        isModalOpen={isModalOpen}
+        modalTitle={PRODUCT_MODAL_TITLE}
+        closeButtonLabel={PRODUCT_MODAL_CANCEL}
+        actionLabel={PRODUCT_MODAL_ACTION_LABEL}
+        modalSize="2xl"
+      >
+        <NewService />
+      </Modal>
+      <Button
+        leftIcon={<FiPlus />}
+        alignSelf="flex-start"
+        mb="16px"
+        onClick={handleModalOpen}
+      >
+        {NEW_PRODUCT_BUTTON}
+      </Button>
+      <Flex justifyContent="space-between" w="100%">
+        <Heading w="100%" minW="512px" as="h1" size="lg">
+          {VIEW_PRODUCTS_PAGE_TITLE}
+        </Heading>
+        <Input placeholder={SEARCH_PRODUCT_PLACEHOLDER} maxWidth="256px" />
+      </Flex>
+      <FormLabel minW="512px" w="100%" ml="16px">
+        {VIEW_PRODUCTS_DESCRIPTION}
       </FormLabel>
-      <Flex flexDir="column" w="65%" minW="512px">
-        <Flex marginTop="32px">
-          <FormControl mr="64px" isRequired isInvalid={isErrorName}>
-            <FormLabel>{PRODUCT_ATTRIBUTES_LABEL.NAME}</FormLabel>
-            <Input type="text" value={name} onChange={handleNameChange} />
-            {!isErrorName ? (
-              <FormHelperText>{PRODUCT_TIPS_LABEL.NAME}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{PRODUCT_ERROR.NAME}</FormErrorMessage>
-            )}
-          </FormControl>
-          <FormControl
-            isRequired
-            isInvalid={isErrorPrice}
-            onChange={handlePriceChange}
-          >
-            <FormLabel>{PRODUCT_ATTRIBUTES_LABEL.PRICE}</FormLabel>
-            <NumberInput allowMouseWheel value={price}>
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-            {!isErrorPrice ? (
-              <FormHelperText>{PRODUCT_TIPS_LABEL.PRICE}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{PRODUCT_ERROR.PRICE}</FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-
-        <Flex marginTop="32px" w="50%" alignSelf="self-start">
-          <FormControl isInvalid={isErrorCategory}>
-            <FormLabel>{PRODUCT_ATTRIBUTES_LABEL.CATEGORY}</FormLabel>
-            <Select
-              value={category}
-              placeholder={CATEGORY_PLACEHOLDER}
-              onChange={handleCategoryChange}
-            >
-              <option>Cosméticos</option>
-              <option>Bebidas</option>
-            </Select>
-            {!isErrorCategory ? (
-              <FormHelperText>{PRODUCT_TIPS_LABEL.CATEGORY}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{PRODUCT_ERROR.CATEGORY}.</FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-
-        <Flex marginTop="32px" w="100%" alignSelf="center">
-          <FormControl isInvalid={isErrorDescription}>
-            <FormLabel>{PRODUCT_ATTRIBUTES_LABEL.DESCRIPTION}</FormLabel>
-            <Textarea value={description} onChange={handleDescriptionChange} />
-            {!isErrorDescription ? (
-              <FormHelperText>{PRODUCT_TIPS_LABEL.DESCRIPTION}</FormHelperText>
-            ) : (
-              <FormErrorMessage>{PRODUCT_ERROR.DESCRIPTION}</FormErrorMessage>
-            )}
-          </FormControl>
-        </Flex>
-
-        <Flex w="100%" justifyContent="flex-end" mt="32px">
-          <Button>{CREATE_BUTTON_LABEL}</Button>
-        </Flex>
+      <Table columns={productsColumns} data={productsMockData} />
+      <Flex justifyContent="space-between" w="98%" mt="32px">
+        <Text>Mostrando de 1 até 10 de 6.079 registros</Text>
+        <Pagination />
       </Flex>
     </>
   );
 }
 
-export default memo(Client);
+export default memo(Products);
