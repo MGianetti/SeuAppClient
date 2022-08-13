@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 
 import {
   Heading,
@@ -25,12 +25,22 @@ import {
   clientColumn,
   clientMockData,
 } from './clients.constants';
+import { useDispatch } from 'react-redux';
+import { getAll } from '../../services/client.service';
+import { fetchAllClients } from '../../store/clients/clientsSlice';
 
 function Clients() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalClose = () => setIsModalOpen(false);
   const handleModalOpen = () => setIsModalOpen(true);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getAllClients = async () => await getAll();
+    dispatch(fetchAllClients(getAllClients()));
+  }, [dispatch]);
 
   return (
     <>
