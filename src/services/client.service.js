@@ -1,53 +1,41 @@
 import axios from 'axios';
 import endPoints from '../config/endpoints';
 
-export const createNew = async newItem => {
+export const createNew = async newClient => {
   const url = endPoints.client.createNew;
-  const { data } = await axios.post(
-    'http://localhost:3001/api/product/new',
-    JSON.stringify(newItem),
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+  const { data } = await axios.post(url, JSON.stringify(newClient), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return Promise.resolve(data);
 };
 
-export const editById = async newItem => {
-  const url = endPoints;
-  const { data } = await axios.post(
-    'http://localhost:3001/api/product/new',
-    JSON.stringify(newItem),
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+export const editById = async editedClient => {
+  const url = endPoints.client.editById;
+  const { data } = await axios.post(url, JSON.stringify(editedClient), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return Promise.resolve(data);
 };
 
-export const getAll = async newItem => {
-  const url = endPoints;
-  const { data } = await axios.post(
-    'http://localhost:3001/api/product/new',
-    JSON.stringify(newItem),
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+export const getAll = async () => {
+  const url = endPoints.client.getAll;
+  const { data } = await axios.get(url, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return Promise.resolve(data);
 };
 
-export const removeById = async newItem => {
-  const url = endPoints;
+export const removeById = async clientToBeRemovedById => {
+  const url = endPoints.client.removeById;
   const { data } = await axios.post(
-    'http://localhost:3001/api/product/new',
-    JSON.stringify(newItem),
+    url,
+    JSON.stringify(clientToBeRemovedById),
     {
       headers: {
         'Content-Type': 'application/json',

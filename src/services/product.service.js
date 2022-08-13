@@ -1,53 +1,41 @@
 import axios from 'axios';
 import endPoints from '../config/endpoints';
 
-export const createNew = async newItem => {
-  const url = endPoints.client.createNew;
-  const { data } = await axios.post(
-    'http://localhost:3001/api/product/new',
-    JSON.stringify(newItem),
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+export const createNew = async newProduct => {
+  const url = endPoints.product.createNew;
+  const { data } = await axios.post(url, JSON.stringify(newProduct), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return Promise.resolve(data);
 };
 
-export const editById = async newItem => {
-  const url = endPoints;
-  const { data } = await axios.post(
-    'http://localhost:3001/api/product/new',
-    JSON.stringify(newItem),
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+export const editById = async editedProduct => {
+  const url = endPoints.product.editById;
+  const { data } = await axios.post(url, JSON.stringify(editedProduct), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return Promise.resolve(data);
 };
 
-export const getAll = async newItem => {
-  const url = endPoints;
-  const { data } = await axios.post(
-    'http://localhost:3001/api/product/new',
-    JSON.stringify(newItem),
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+export const getAll = async () => {
+  const url = endPoints.product.getAll;
+  const { data } = await axios.get(url, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   return Promise.resolve(data);
 };
 
-export const removeById = async newItem => {
-  const url = endPoints;
+export const removeById = async productToBeRemovedById => {
+  const url = endPoints.product.removeById;
   const { data } = await axios.post(
-    'http://localhost:3001/api/product/new',
-    JSON.stringify(newItem),
+    url,
+    JSON.stringify(productToBeRemovedById),
     {
       headers: {
         'Content-Type': 'application/json',
