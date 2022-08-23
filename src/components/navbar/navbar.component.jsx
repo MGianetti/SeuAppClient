@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { Box, Flex, Icon } from '@chakra-ui/react';
 
 import { FiMenu } from 'react-icons/fi';

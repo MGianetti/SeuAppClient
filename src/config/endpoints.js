@@ -1,4 +1,4 @@
-const host = 'localhost:3001';
+const host = 'http://localhost:3001';
 
 export default Object.freeze({
   client: {

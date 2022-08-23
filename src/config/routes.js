@@ -3,6 +3,7 @@ export default Object.freeze({
   products: { root: '/products' },
   professionals: { root: '/professionals' },
   services: { root: '/services' },
-  exibition: { root: '/exibition' },
+  signUp: { root: '/signup' },
+  signIn: { root: '/' },
   notFound: '*',
 });
