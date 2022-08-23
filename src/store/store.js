@@ -1,5 +1,6 @@
 import storeSynchronize from 'redux-localstore';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { firebaseReducer } from 'react-redux-firebase';
 
 import clientsReducer from './clients/clientsSlice';
 import productsReducer from './products/productsSlice';
@@ -11,6 +12,7 @@ const defaultReducer = combineReducers({
   products: productsReducer,
   professionals: professionalsReducer,
   services: servicesReducer,
+  firebase: firebaseReducer,
 });
 
 const store = configureStore({
