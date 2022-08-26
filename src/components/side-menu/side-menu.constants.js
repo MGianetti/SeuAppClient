@@ -1,3 +1,4 @@
+import React from 'react';
 import { FiUser, FiScissors, FiShoppingBag } from 'react-icons/fi';
 
 export const SIDE_MENU_ITEMS_LABELS = Object.freeze({

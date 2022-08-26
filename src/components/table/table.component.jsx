@@ -10,14 +10,19 @@ import {
   chakra,
   TableContainer,
 } from '@chakra-ui/react';
-import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
+
 import { useTable, useSortBy } from 'react-table';
 
 function DataTable(props) {
   const { columns, data } = props;
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy);
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({ columns, data }, useSortBy);
 
   return (
     <TableContainer
@@ -41,13 +46,11 @@ function DataTable(props) {
                 >
                   {column.render('Header')}
                   <chakra.span pl="4">
-                    {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        <TriangleDownIcon aria-label="sorted descending" />
-                      ) : (
-                        <TriangleUpIcon aria-label="sorted ascending" />
-                      )
-                    ) : null}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? '/\\'
+                        : '\\/'
+                      : null}
                   </chakra.span>
                 </Th>
               ))}

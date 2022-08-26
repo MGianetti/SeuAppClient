@@ -1,5 +1,9 @@
 import axios from 'axios';
 import endPoints from '../config/endpoints';
+import { db } from '../config/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+
+const clientsCollection = collection(db, 'Clients');
 
 export const createNew = async newClient => {
   const url = endPoints.client.createNew;
@@ -22,13 +26,8 @@ export const editById = async editedClient => {
 };
 
 export const getAll = async () => {
-  const url = endPoints.client.getAll;
-  const { data } = await axios.get(url, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return Promise.resolve(data);
+  const allClients = await getDocs(clientsCollection);
+  return allClients;
 };
 
 export const removeById = async clientToBeRemovedById => {

@@ -1,20 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { doc } from 'firebase/firestore';
+import { getAll } from '../../services/client.service';
 
-const initialState = { clients: [] };
+const initialState = { clients: [], loading: false, error: '' };
+
+export const fetchAllClients = createAsyncThunk(
+  'clients/fetchAllClients',
+  async () => {
+    const allClients = await getAll();
+    return allClients;
+  }
+);
 
 export const clientsSlice = createSlice({
   name: 'clients',
   initialState,
-  reducers: {
-    newClient: (state, action) => {
-      state.clients = [...state.clients, action.payload];
+  reducers: {},
+  extraReducers: {
+    [fetchAllClients.fulfilled]: (state, action) => {
+      const { docs } = action.payload;
+      const clients = docs.map(doc => ({ ...doc.data(), id: doc.id }));
+      state.clients = clients;
+      state.loading = false;
     },
-    fetchAllClients: (state, action) => {
-      state.clients = action.payload;
+    [fetchAllClients.rejected]: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+    },
+    [fetchAllClients.pending]: (state, action) => {
+      state.loading = true;
     },
   },
 });
-
-export const { newClient, fetchAllClients } = clientsSlice.actions;
 
 export default clientsSlice.reducer;

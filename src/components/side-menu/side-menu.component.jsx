@@ -29,7 +29,7 @@ const SideMenu = props => {
       <Flex {...sideMenuItemsContainerStyles}>
         {Object.keys(SIDE_MENU_ITEMS_LABELS).map(menuItemKey => {
           const sideMenuItemKey = `${menuItemKey}-menu-item-key`;
-          const sideMenuItemRoute = routes[menuItemKey.toLowerCase()]?.root;
+          const sideMenuItemRoute = routes[menuItemKey.toLowerCase()].root;
           const isMenuItemSelected = selectedMenuItem === menuItemKey;
 
           return (
