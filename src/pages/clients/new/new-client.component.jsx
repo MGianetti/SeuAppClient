@@ -10,7 +10,6 @@ import {
   Input,
   Select,
 } from '@chakra-ui/react';
-
 import {
   CLIENT_PAGE_TITLE,
   CLIENT_ATTRIBUTES_LABEL,
@@ -20,16 +19,15 @@ import {
   SEX_OPTIONS,
 } from '../clients.constants';
 
-function NewClient() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [cellphone, setCellphone] = useState('');
-  const [sex, setSex] = useState();
-
-  const handleEmailChange = e => setEmail(e.target.value);
-  const handleNameChange = e => setName(e.target.value);
-  const handleCellphoneChange = e => setCellphone(e.target.value);
-  const handleSexChange = e => setSex(e.target.value);
+function NewClient(props) {
+  const { newClientProps, newClientActions } = props;
+  const { name, email, cellphone, sex } = newClientProps;
+  const {
+    handleEmailChange,
+    handleNameChange,
+    handleCellphoneChange,
+    handleSexChange,
+  } = newClientActions;
 
   // TODO Make error checking handler
   const isErrorEmail = false;

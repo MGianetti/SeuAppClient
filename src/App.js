@@ -1,7 +1,6 @@
 import React from 'react';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import LoggedOutLayout from './components/logged-out-layout';
 import LoggedInLayout from './components/logged-in-layout';
@@ -79,10 +78,4 @@ function App() {
   );
 }
 
-// const mapStateToProps = state => {
-//   console.log(state);
-//   return {};
-// };
-
-// export default connect(mapStateToProps)(App);
 export default App;

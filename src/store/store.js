@@ -6,7 +6,6 @@ import clientsReducer from './clients/clientsSlice';
 import productsReducer from './products/productsSlice';
 import professionalsReducer from './professionals/professionalsSlice';
 import servicesReducer from './services/servicesSlice';
-
 const defaultReducer = combineReducers({
   clients: clientsReducer,
   products: productsReducer,
@@ -17,6 +16,7 @@ const defaultReducer = combineReducers({
 
 const store = configureStore({
   reducer: defaultReducer,
+  middleware: getDefaultMiddleware => getDefaultMiddleware(),
 });
 
 export default store;
