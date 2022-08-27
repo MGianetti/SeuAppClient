@@ -1,7 +1,9 @@
 import React, { memo } from 'react';
 import { Box, Container, Image } from '@chakra-ui/react';
 
-const ContentContainer = ({ children }) => {
+const ContentContainer = props => {
+  const { children, maxW = '1024px' } = props;
+
   return (
     <Box w="100%" h="100%">
       <Container
@@ -23,7 +25,8 @@ const ContentContainer = ({ children }) => {
           h="auto"
           w="70%"
           bg="white"
-          minW="576px"
+          minW="256px"
+          maxW={maxW}
           position="relative"
           display="flex"
           alignItems="center"

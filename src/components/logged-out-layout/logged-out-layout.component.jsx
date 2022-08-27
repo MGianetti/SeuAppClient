@@ -7,7 +7,7 @@ const LoggedOutLayout = ({ children }) => {
   return (
     <>
       <Flex height="100vh;" minH="1024px">
-        <ContentContainer>{children}</ContentContainer>
+        <ContentContainer maxW="512px">{children}</ContentContainer>
       </Flex>
     </>
   );

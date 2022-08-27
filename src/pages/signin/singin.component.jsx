@@ -62,6 +62,7 @@ const Signin = () => {
         justifyContent="center"
         w="auto"
         minW="256px"
+        maxW="256px"
         as="h1"
         size="lg"
         display="flex"
