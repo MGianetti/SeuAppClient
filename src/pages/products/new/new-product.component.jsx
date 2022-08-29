@@ -24,17 +24,13 @@ import {
   CATEGORY_PLACEHOLDER,
 } from '../products.constants';
 
-const NewProduct = () => {
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [category, setCategory] = useState('');
-
-  const handleDescriptionChange = e => setDescription(e.target.value);
-  const handlePriceChange = e => setPrice(e.target.value);
-  const handleCategoryChange = e => setCategory(e.target.value);
+const NewProduct = props => {
+  const { newProductProps, newProductActions } = props;
+  const { description, price, category } = newProductProps;
+  const { handleDescriptionChange, handlePriceChange, handleCategoryChange } =
+    newProductActions;
 
   // TODO Make error checking handler
-
   const isErrorDescription = false;
   const isErrorPrice = false;
   const isErrorCategory = false;

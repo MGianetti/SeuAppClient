@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import {
   Flex,
   FormControl,
@@ -16,20 +16,17 @@ import {
   PROFESSIONAL_TIPS_LABEL,
 } from '../professionals.constants';
 
-function NewProfessional() {
-  const [name, setName] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [cnpj, setCnpj] = useState('');
-  const [cellphone, setCellphone] = useState();
-  const [email, setEmail] = useState(30);
-
-  const handleNameChange = e => setName(e.target.value);
-  const handleNicknameChange = e => setNickname(e.target.value);
-  const handleCpfChange = e => setCpf(e.target.value);
-  const handleCnpjChange = e => setCnpj(e.target.value);
-  const handleCellphoneChange = e => setCellphone(e.target.value);
-  const handleEmailChange = e => setEmail(e.target.value);
+function NewProfessional(props) {
+  const { newProfessionalProps, newProfessionalActions } = props;
+  const { name, nickname, cpf, cnpj, cellphone, email } = newProfessionalProps;
+  const {
+    handleNameChange,
+    handleNicknameChange,
+    handleCpfChange,
+    handleCnpjChange,
+    handleCellphoneChange,
+    handleEmailChange,
+  } = newProfessionalActions;
 
   // TODO Make error checking handler
   const isErrorName = false;

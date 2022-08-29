@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 
 import {
   Flex,
@@ -19,7 +19,7 @@ import {
   SEX_OPTIONS,
 } from '../clients.constants';
 
-function NewClient(props) {
+const NewClient = props => {
   const { newClientProps, newClientActions } = props;
   const { name, email, cellphone, sex } = newClientProps;
   const {
@@ -95,6 +95,6 @@ function NewClient(props) {
       </Flex>
     </>
   );
-}
+};
 
 export default memo(NewClient);

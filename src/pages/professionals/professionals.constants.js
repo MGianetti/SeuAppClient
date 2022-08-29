@@ -89,65 +89,6 @@ export const PROFESSIONAL_ERROR = Object.freeze({
   ),
 });
 
-export const professionalsMockData = [
-  {
-    name: 'Mateus Gianetti de Jesus',
-    nickname: 'Jesus',
-    email: 'mateus@gmail.com',
-    cellphone: '(12) 98888-4567',
-    cpf: '444.444.555-00',
-    cnpj: '34.627.313/0001-96',
-  },
-  {
-    name: 'A Gianetti de Jesus',
-    nickname: 'Jesus',
-    email: 'mateus@gmail.com',
-    cellphone: '(12) 98888-2345',
-    cpf: '444.345.555-00',
-    cnpj: '34.627.313/0001-96',
-  },
-  {
-    name: 'B Gianetti de Jesus',
-    nickname: 'Jesus',
-    email: 'mateus@gmail.com',
-    cellphone: '(12) 98888-5678',
-    cpf: '123.444.555-00',
-    cnpj: '34.627.313/0001-96',
-  },
-  {
-    name: 'C Gianetti de Jesus',
-    nickname: 'Jesus',
-    email: 'mateus@gmail.com',
-    cellphone: '(12) 98888-7777',
-    cpf: '444.444.555-40',
-    cnpj: '34.627.313/0001-96',
-  },
-  {
-    name: 'D Gianetti de Jesus',
-    nickname: 'Jesus',
-    email: 'mateus@gmail.com',
-    cellphone: '(12) 98888-7777',
-    cpf: '444.444.555-00',
-    cnpj: '34.627.313/0001-96',
-  },
-  {
-    name: 'Mateus Gianetti de Jesus',
-    nickname: 'Jesus',
-    email: 'mateus@gmail.com',
-    cellphone: '(12) 98888-7777',
-    cpf: '444.444.555-01',
-    cnpj: '34.627.313/0001-96',
-  },
-  {
-    name: 'Mateus Gianetti de Jesus',
-    nickname: 'Jesus',
-    email: 'mateus@gmail.com',
-    cellphone: '(12) 98888-7777',
-    cpf: '444.444.555-00',
-    cnpj: '34.627.313/0001-96',
-  },
-];
-
 export const professionalsColumns = [
   {
     Header: 'Nome',
@@ -172,6 +113,5 @@ export const professionalsColumns = [
   {
     Header: 'CNPJ',
     accessor: 'cnpj',
-    isNumeric: true,
   },
 ];

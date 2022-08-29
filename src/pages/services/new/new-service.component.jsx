@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 
 import {
   Flex,
@@ -22,12 +22,10 @@ import {
   SERVICE_PAGE_TITLE,
 } from '../services.constants';
 
-const NewService = () => {
-  const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState('');
-
-  const handlePriceChange = e => setPrice(e.target.value);
-  const handleDescriptionChange = e => setDescription(e.target.value);
+const NewService = props => {
+  const { newServiceProps, newServiceActions } = props;
+  const { description, price } = newServiceProps;
+  const { handlePriceChange, handleDescriptionChange } = newServiceActions;
 
   // TODO Make error checking handler
   const isErrorPrice = false;

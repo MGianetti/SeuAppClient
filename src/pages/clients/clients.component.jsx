@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import {
   Heading,
   FormLabel,
@@ -25,7 +25,7 @@ import {
   SEARCH_CLIENT_PLACEHOLDER,
   clientColumn,
 } from './clients.constants';
-import { useDispatch } from 'react-redux';
+
 import { fetchAllClients, addClient } from '../../store/clients/clientsSlice';
 import { getAll } from '../../services/client.service';
 
