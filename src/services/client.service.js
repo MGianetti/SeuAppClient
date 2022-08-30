@@ -22,6 +22,7 @@ export const createClient = async newUser => {
 export const deleteClient = async clientDocId => {
   const clientDoc = doc(db, 'Clients', clientDocId);
   await deleteDoc(clientDoc);
+  return clientDocId;
 };
 
 export const updateClient = async ({ clientBeingEditedId, newClientProps }) => {

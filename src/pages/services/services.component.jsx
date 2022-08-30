@@ -19,23 +19,32 @@ import {
   servicesColumns,
   VIEW_SERVICES_DESCRIPTION,
   VIEW_SERVICES_PAGE_TITLE,
+  SERVICE_PAGE_TITLE,
+  SERVICE_PAGE_TITLE_EDITING,
+  SERVICE_MODAL_TITLE_EDITING,
+  SERVICE_MODAL_ACTION_LABEL_EDITING,
 } from './services.constants';
 
 import { FiPlus } from 'react-icons/fi';
 
 import NewService from './new';
-import { Pagination, Table, Modal } from '../../components';
+import { Pagination, Table, Modal, RowActions } from '../../components';
 import { connect, useDispatch } from 'react-redux';
 import {
-  addService,
-  fetchAllServices,
+  getAllServicesAction,
+  createServiceAction,
+  deleteServiceAction,
+  updateServiceAction,
 } from '../../store/services/servicesSlice';
 
 function Services(props) {
   const { services, isLoading } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleModalClose = () => setIsModalOpen(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    handleEmptyAfterSubmit();
+  };
   const handleModalOpen = () => setIsModalOpen(true);
 
   const [description, setDescription] = useState('');
@@ -45,27 +54,90 @@ function Services(props) {
   const handlePriceChange = valueString =>
     setPrice(valueString.replace(/^\$/, ''));
 
+  const [serviceBeingEditedId, setServiceBeingEditedId] = useState('');
+  const isUserEditingService =
+    serviceBeingEditedId === '' ? 'creating' : 'editing';
+
   const handleEmptyAfterSubmit = () => {
     setDescription('');
     setPrice('');
+    setServiceBeingEditedId('');
   };
 
-  const newServiceProps = { description, price };
+  const modalActionsMapper = {
+    creating: {
+      modalTitle: SERVICE_MODAL_TITLE,
+      actionLabel: SERVICE_MODAL_ACTION_LABEL,
+      pageTitle: SERVICE_PAGE_TITLE,
+      handleAction: () => handleCreateService(),
+    },
+    editing: {
+      modalTitle: SERVICE_MODAL_TITLE_EDITING,
+      actionLabel: SERVICE_MODAL_ACTION_LABEL_EDITING,
+      pageTitle: SERVICE_PAGE_TITLE_EDITING,
+      handleAction: () => handleEditService(),
+    },
+  };
+
+  const newServiceProps = {
+    description,
+    price,
+    pageTitle: modalActionsMapper[isUserEditingService].pageTitle,
+  };
   const newServiceActions = { handlePriceChange, handleDescriptionChange };
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllServices());
+    dispatch(getAllServicesAction());
   }, [dispatch]);
 
-  const handleSubmit = () => {
+  const handleCreateService = () => {
     try {
-      dispatch(addService(newServiceProps));
+      dispatch(createServiceAction(newServiceProps));
       handleEmptyAfterSubmit();
       alert('Serviço adicionado com sucesso!');
       setIsModalOpen(false);
     } catch (e) {}
+  };
+
+  const handleDeleteService = documentId => {
+    try {
+      dispatch(deleteServiceAction(documentId));
+      alert('Servicee deletado com sucesso!');
+    } catch (e) {}
+  };
+
+  const handleEditService = () => {
+    try {
+      dispatch(updateServiceAction({ serviceBeingEditedId, newServiceProps }));
+      alert('Serviço editado com sucesso!');
+      setIsModalOpen(false);
+    } catch (e) {}
+  };
+
+  const handleOpenEditModal = serviceData => {
+    const { description, price, id } = serviceData;
+    setServiceBeingEditedId(id);
+    setDescription(description);
+    setPrice(price);
+    setIsModalOpen(true);
+  };
+
+  const actionsCell = {
+    Header: () => null,
+    id: 'editor',
+    Cell: ({ row }) => {
+      return (
+        <span>
+          <RowActions
+            rowData={row}
+            handleDelete={handleDeleteService}
+            handleEdit={handleOpenEditModal}
+          />
+        </span>
+      );
+    },
   };
 
   return (
@@ -73,10 +145,10 @@ function Services(props) {
       <Modal
         onModalClose={handleModalClose}
         isModalOpen={isModalOpen}
-        handleAction={handleSubmit}
-        modalTitle={SERVICE_MODAL_TITLE}
         closeButtonLabel={SERVICE_MODAL_CANCEL}
-        actionLabel={SERVICE_MODAL_ACTION_LABEL}
+        modalTitle={modalActionsMapper[isUserEditingService].modalTitle}
+        actionLabel={modalActionsMapper[isUserEditingService].actionLabel}
+        handleAction={modalActionsMapper[isUserEditingService].handleAction}
         modalSize="2xl"
       >
         <NewService
@@ -104,7 +176,7 @@ function Services(props) {
       {isLoading ? (
         <Spinner />
       ) : (
-        <Table columns={servicesColumns} data={services} />
+        <Table columns={[...servicesColumns, actionsCell]} data={services} />
       )}
       <Flex justifyContent="space-between" w="98%" mt="32px">
         <Text>Mostrando de 1 até 10 de 6.079 registros</Text>

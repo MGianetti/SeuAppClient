@@ -1,25 +1,71 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getAll, createService } from '../../services/service.service';
+import {
+  getAllServices,
+  createService,
+  deleteService,
+  updateService,
+} from '../../services/service.service';
 
 const initialState = { services: [], isLoading: false, error: '' };
 
-export const fetchAllServices = createAsyncThunk(
-  'services/fetchAllServices',
+export const getAllServicesAction = createAsyncThunk(
+  'services/getAllServicesAction',
   async () => {
-    const allServices = await getAll();
+    const allServices = await getAllServices();
     return allServices;
   }
 );
 
-export const addService = createAsyncThunk(
-  'services/addNewService',
+export const createServiceAction = createAsyncThunk(
+  'services/createServiceActionService',
   async newService => {
     await createService(newService);
     return newService;
   }
 );
 
-const fetchAllServicesFullfilledReducer = (state, { payload }) => {
+export const deleteServiceAction = createAsyncThunk(
+  'services/deleteServiceAction',
+  async serviceDocId => {
+    const deletedServiceId = await deleteService(serviceDocId);
+    return deletedServiceId;
+  }
+);
+
+export const updateServiceAction = createAsyncThunk(
+  'Services/updateServiceAction',
+  async ({ serviceBeingEditedId, newServiceProps }) => {
+    const updatedService = await updateService({
+      serviceBeingEditedId,
+      newServiceProps,
+    });
+    return updatedService;
+  }
+);
+
+const updateServiceActionFullfilledReducer = (state, { payload }) => {
+  const { serviceBeingEditedId, newServiceProps } = payload;
+  const stateWithoutOldService = state.services.filter(
+    service => service.id !== serviceBeingEditedId
+  );
+  const stateWithNewestService = [
+    ...stateWithoutOldService,
+    { id: serviceBeingEditedId, ...newServiceProps },
+  ];
+  state.services = stateWithNewestService;
+  state.isLoading = false;
+};
+
+const deleteServiceActionFullfilledReducer = (state, { payload }) => {
+  debugger;
+  const servicesAfterDelete = state.services.filter(
+    service => service.id !== payload
+  );
+
+  state.services = servicesAfterDelete;
+};
+
+const getAllServicesActionFullfilledReducer = (state, { payload }) => {
   const { docs } = payload;
   const services = docs.map(doc => ({ ...doc.data(), id: doc.id }));
 
@@ -27,7 +73,7 @@ const fetchAllServicesFullfilledReducer = (state, { payload }) => {
   state.isLoading = false;
 };
 
-const addServiceFullfilledReducer = (state, { payload }) => {
+const createServiceActionFullfilledReducer = (state, { payload }) => {
   state.isLoading = false;
   const newServicesList = [...state.services, payload];
   state.services = newServicesList;
@@ -47,11 +93,15 @@ export const servicesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchAllServices.fulfilled]: fetchAllServicesFullfilledReducer,
-    [fetchAllServices.pending]: pendingReducer,
-    [fetchAllServices.rejected]: errorReducer,
-    [addService.fulfilled]: addServiceFullfilledReducer,
-    [addService.rejected]: errorReducer,
+    [createServiceAction.fulfilled]: createServiceActionFullfilledReducer,
+    [createServiceAction.pending]: pendingReducer,
+    [createServiceAction.rejected]: errorReducer,
+    [deleteServiceAction.fulfilled]: deleteServiceActionFullfilledReducer,
+    [deleteServiceAction.rejected]: errorReducer,
+    [getAllServicesAction.fulfilled]: getAllServicesActionFullfilledReducer,
+    [getAllServicesAction.pending]: pendingReducer,
+    [getAllServicesAction.rejected]: errorReducer,
+    [updateServiceAction.fulfilled]: updateServiceActionFullfilledReducer,
   },
 });
 

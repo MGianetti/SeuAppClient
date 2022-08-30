@@ -19,12 +19,11 @@ import {
   SERVICE_ATTRIBUTES_LABEL,
   SERVICE_ERROR,
   SERVICE_TIPS_LABEL,
-  SERVICE_PAGE_TITLE,
 } from '../services.constants';
 
 const NewService = props => {
   const { newServiceProps, newServiceActions } = props;
-  const { description, price } = newServiceProps;
+  const { description, price, pageTitle } = newServiceProps;
   const { handlePriceChange, handleDescriptionChange } = newServiceActions;
 
   // TODO Make error checking handler
@@ -34,7 +33,7 @@ const NewService = props => {
   return (
     <>
       <Heading w="auto" minW="512px" as="h1" size="lg">
-        {SERVICE_PAGE_TITLE}
+        {pageTitle}
       </Heading>
       <Flex flexDir="column" w="100%" minW="512px">
         <Flex marginTop="32px">

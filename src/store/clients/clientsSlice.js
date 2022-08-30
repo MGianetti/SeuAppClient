@@ -27,7 +27,8 @@ export const createClientAction = createAsyncThunk(
 export const deleteClientAction = createAsyncThunk(
   'clients/deleteClientAction',
   async clientDocId => {
-    await deleteClient(clientDocId);
+    const deletedClientId = await deleteClient(clientDocId);
+    return deletedClientId;
   }
 );
 
@@ -56,10 +57,12 @@ const updateClientActionFullfilledReducer = (state, { payload }) => {
 };
 
 const deleteClientActionFullfilledReducer = (state, { payload }) => {
-  const clients = state.clients.filter(doc => doc.id !== payload);
+  debugger;
+  const clientsAfterDelete = state.clients.filter(
+    client => client.id !== payload
+  );
 
-  state.clients = clients;
-  state.isLoading = false;
+  state.clients = clientsAfterDelete;
 };
 
 const getAllClientsActionFullfilledReducer = (state, { payload }) => {
@@ -94,7 +97,6 @@ export const clientsSlice = createSlice({
     [createClientAction.pending]: pendingReducer,
     [createClientAction.rejected]: errorReducer,
     [deleteClientAction.fulfilled]: deleteClientActionFullfilledReducer,
-    [deleteClientAction.pending]: pendingReducer,
     [deleteClientAction.rejected]: errorReducer,
     [getAllClientsAction.fulfilled]: getAllClientsActionFullfilledReducer,
     [getAllClientsAction.pending]: pendingReducer,

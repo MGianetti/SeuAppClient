@@ -159,8 +159,8 @@ function Clients(props) {
       <Modal
         onModalClose={handleModalClose}
         isModalOpen={isModalOpen}
-        modalTitle={modalActionsMapper[isUserEditingClient].modalTitle}
         closeButtonLabel={CLIENT_MODAL_CANCEL}
+        modalTitle={modalActionsMapper[isUserEditingClient].modalTitle}
         actionLabel={modalActionsMapper[isUserEditingClient].actionLabel}
         handleAction={modalActionsMapper[isUserEditingClient].handleAction}
       >

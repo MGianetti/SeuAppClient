@@ -9,13 +9,13 @@ const RowActions = props => {
 
   return (
     <>
-      <Box display="flex">
-        <Box pr="8px">
+      <Box display="flex" justifyContent="flex-end">
+        <Box pr="16px" cursor="pointer" _hover={{ color: 'darkBlue' }}>
           <FiEdit3 onClick={() => handleEdit(objectData)} />
         </Box>
-        <Box />
-        <FiTrash onClick={() => handleDelete(id)} />
-        <Box />
+        <Box cursor="pointer" _hover={{ color: 'darkRed' }}>
+          <FiTrash onClick={() => handleDelete(id)} />
+        </Box>
       </Box>
     </>
   );

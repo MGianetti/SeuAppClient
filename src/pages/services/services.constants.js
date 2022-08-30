@@ -1,6 +1,7 @@
 import { DEFAULT_TIP, DEFAULT_ERROR_MESSAGE_M } from '../pages.constants';
 
 export const SERVICE_PAGE_TITLE = 'Novo serviço:';
+export const SERVICE_PAGE_TITLE_EDITING = 'Editar serviço:';
 export const SERVICE_PAGE_DESCRIPTION = 'Cadastre um novo serviço.';
 export const VIEW_SERVICES_PAGE_TITLE = 'Serviços:';
 export const VIEW_SERVICES_DESCRIPTION = 'Consulta de serviços.';
@@ -8,9 +9,12 @@ export const NEW_SERVICE_BUTTON = 'Novo';
 
 export const SEARCH_SERVICE_PLACEHOLDER = 'Buscar serviço';
 
-export const SERVICE_MODAL_TITLE = 'Cadastre um novo serviço';
 export const SERVICE_MODAL_CANCEL = 'Cancelar';
+export const SERVICE_MODAL_TITLE = 'Cadastre um novo serviço';
 export const SERVICE_MODAL_ACTION_LABEL = 'Cadastrar';
+
+export const SERVICE_MODAL_TITLE_EDITING = 'Edite o serviço';
+export const SERVICE_MODAL_ACTION_LABEL_EDITING = 'Salvar';
 
 export const SERVICE_KEYS = Object.freeze({
   DESCRIPTION: 'DESCRIPTION',
@@ -43,21 +47,6 @@ export const SERVICE_ERROR = Object.freeze({
     SERVICE_ATTRIBUTES_LABEL.DESCRIPTION.toLowerCase()
   ),
 });
-
-export const servicesMockData = [
-  {
-    description: 'Corte',
-    price: 39.9,
-  },
-  {
-    description: 'Corte',
-    price: 29.9,
-  },
-  {
-    description: 'Corte',
-    price: 19.9,
-  },
-];
 
 export const servicesColumns = [
   {
