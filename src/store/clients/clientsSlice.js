@@ -18,9 +18,9 @@ export const getAllClientsAction = createAsyncThunk(
 
 export const createClientAction = createAsyncThunk(
   'clients/createClientAction',
-  async newUser => {
-    await createClient(newUser);
-    return newUser;
+  async newClient => {
+    await createClient(newClient);
+    return newClient;
   }
 );
 

@@ -18,25 +18,34 @@ import {
   PRODUCT_MODAL_CANCEL,
   PRODUCT_MODAL_ACTION_LABEL,
   productsColumns,
+  PRODUCT_PAGE_TITLE,
   SEARCH_PRODUCT_PLACEHOLDER,
+  PRODUCT_MODAL_TITLE_EDITING,
+  PRODUCT_MODAL_ACTION_LABEL_EDITING,
+  PRODUCT_PAGE_TITLE_EDIT,
 } from './products.constants';
 
 import { FiPlus } from 'react-icons/fi';
 
 import NewProduct from './new';
-import { Pagination, Table, Modal } from '../../components';
+import { Pagination, Table, Modal, RowActions } from '../../components';
 import { connect, useDispatch } from 'react-redux';
 
 import {
-  fetchAllProducts,
-  addProduct,
+  getAllProductsAction,
+  createProductAction,
+  deleteProductAction,
+  updateProductAction,
 } from '../../store/products/productsSlice';
 
 function Products(props) {
   const { products, isLoading } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleModalClose = () => setIsModalOpen(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    handleEmptyAfterSubmit();
+  };
   const handleModalOpen = () => setIsModalOpen(true);
 
   const [description, setDescription] = useState('');
@@ -46,13 +55,38 @@ function Products(props) {
   const handlePriceChange = e => setPrice(e.target.value);
   const handleCategoryChange = e => setCategory(e.target.value);
 
+  const [productBeingEditedId, setProductBeingEditedId] = useState('');
+  const isUserEditingProduct =
+    productBeingEditedId === '' ? 'creating' : 'editing';
+
   const handleEmptyAfterSubmit = () => {
     setDescription('');
     setPrice('');
     setCategory('');
+    setProductBeingEditedId('');
   };
 
-  const newProductProps = { description, price, category };
+  const modalActionsMapper = {
+    creating: {
+      modalTitle: PRODUCT_MODAL_TITLE,
+      actionLabel: PRODUCT_MODAL_ACTION_LABEL,
+      pageTitle: PRODUCT_PAGE_TITLE,
+      handleAction: () => handleCreateProduct(),
+    },
+    editing: {
+      modalTitle: PRODUCT_MODAL_TITLE_EDITING,
+      actionLabel: PRODUCT_MODAL_ACTION_LABEL_EDITING,
+      pageTitle: PRODUCT_PAGE_TITLE_EDIT,
+      handleAction: () => handleEditProduct(),
+    },
+  };
+
+  const newProductProps = {
+    description,
+    price,
+    category,
+    pageTitle: modalActionsMapper[isUserEditingProduct].pageTitle,
+  };
   const newProductActions = {
     handleDescriptionChange,
     handlePriceChange,
@@ -62,16 +96,56 @@ function Products(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllProducts());
+    dispatch(getAllProductsAction());
   }, [dispatch]);
 
-  const handleSubmit = () => {
+  const handleCreateProduct = () => {
     try {
-      dispatch(addProduct(newProductProps));
+      dispatch(createProductAction(newProductProps));
       handleEmptyAfterSubmit();
       alert('Produto adicionado com sucesso!');
       setIsModalOpen(false);
     } catch (e) {}
+  };
+
+  const handleDeleteProduct = documentId => {
+    try {
+      dispatch(deleteProductAction(documentId));
+      alert('Produto deletado com sucesso!');
+    } catch (e) {}
+  };
+
+  const handleEditProduct = () => {
+    try {
+      dispatch(updateProductAction({ productBeingEditedId, newProductProps }));
+      alert('Produto editado com sucesso!');
+      setIsModalOpen(false);
+    } catch (e) {}
+  };
+
+  const handleOpenEditModal = productData => {
+    const { description, price, category, id } = productData;
+    setProductBeingEditedId(id);
+    setDescription(description);
+    setPrice(price);
+    setCategory(category);
+    setIsModalOpen(true);
+  };
+
+  const actionsCell = {
+    Header: () => null,
+    id: 'editor',
+    Cell: ({ row }) => {
+      return (
+        <span>
+          <RowActions
+            rowData={row}
+            handleDelete={handleDeleteProduct}
+            handleEdit={handleOpenEditModal}
+          />
+        </span>
+      );
+    },
   };
 
   return (
@@ -79,10 +153,10 @@ function Products(props) {
       <Modal
         onModalClose={handleModalClose}
         isModalOpen={isModalOpen}
-        modalTitle={PRODUCT_MODAL_TITLE}
         closeButtonLabel={PRODUCT_MODAL_CANCEL}
-        actionLabel={PRODUCT_MODAL_ACTION_LABEL}
-        handleAction={handleSubmit}
+        modalTitle={modalActionsMapper[isUserEditingProduct].modalTitle}
+        actionLabel={modalActionsMapper[isUserEditingProduct].actionLabel}
+        handleAction={modalActionsMapper[isUserEditingProduct].handleAction}
       >
         <NewProduct
           newProductProps={newProductProps}
@@ -109,7 +183,7 @@ function Products(props) {
       {isLoading ? (
         <Spinner />
       ) : (
-        <Table columns={productsColumns} data={products} />
+        <Table columns={[...productsColumns, actionsCell]} data={products} />
       )}
       <Flex justifyContent="space-between" w="98%" mt="32px">
         <Text>Mostrando de 1 até 10 de 6.079 registros</Text>

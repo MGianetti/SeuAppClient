@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Heading,
@@ -13,28 +13,38 @@ import {
 import { FiPlus } from 'react-icons/fi';
 
 import NewProfessional from './new';
-import { Pagination, Table, Modal } from '../../components';
+import { Pagination, Table, Modal, RowActions } from '../../components';
 
 import {
   NEW_PROFESSIONAL_BUTTON,
+  PROFESSIONAL_MODAL_ACTION_LABEL_EDITING,
+  PROFESSIONAL_MODAL_ACTION_LABEL,
+  PROFESSIONAL_MODAL_CANCEL,
+  PROFESSIONAL_MODAL_TITLE_EDITING,
+  PROFESSIONAL_MODAL_TITLE,
+  PROFESSIONAL_PAGE_TITLE_EDITING,
+  PROFESSIONAL_PAGE_TITLE,
+  professionalsColumns,
+  SEARCH_PROFESSIONAL_PRACEHOLDER,
   VIEW_PROFESSIONALS_DESCRIPTION,
   VIEW_PROFESSIONALS_PAGE_TITLE,
-  PROFESSIONAL_MODAL_TITLE,
-  PROFESSIONAL_MODAL_CANCEL,
-  PROFESSIONAL_MODAL_ACTION_LABEL,
-  SEARCH_PROFESSIONAL_PRACEHOLDER,
-  professionalsColumns,
 } from './professionals.constants';
 import { connect, useDispatch } from 'react-redux';
 import {
-  addProfessional,
-  fetchAllProfessionals,
+  getAllProfessionalsAction,
+  createProfessionalAction,
+  deleteProfessionalAction,
+  updateProfessionalAction,
 } from '../../store/professionals/professionalsSlice';
+
 const Professionals = props => {
   const { professionals, isLoading } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleModalClose = () => setIsModalOpen(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    handleEmptyAfterSubmit();
+  };
   const handleModalOpen = () => setIsModalOpen(true);
 
   const [name, setName] = useState('');
@@ -51,6 +61,11 @@ const Professionals = props => {
   const handleCnpjChange = e => setCnpj(e.target.value);
   const handleCpfChange = e => setCpf(e.target.value);
 
+  const [professionalBeingEditedId, setProfessionalBeingEditedId] =
+    useState('');
+  const isUserEditingProfessional =
+    professionalBeingEditedId === '' ? 'creating' : 'editing';
+
   const handleEmptyAfterSubmit = () => {
     setName('');
     setNickname('');
@@ -58,9 +73,33 @@ const Professionals = props => {
     setEmail('');
     setCnpj('');
     setCpf('');
+    setProfessionalBeingEditedId('');
   };
 
-  const newProfessionalProps = { name, email, cellphone, nickname, cnpj, cpf };
+  const modalActionsMapper = {
+    creating: {
+      modalTitle: PROFESSIONAL_MODAL_TITLE,
+      actionLabel: PROFESSIONAL_MODAL_ACTION_LABEL,
+      pageTitle: PROFESSIONAL_PAGE_TITLE,
+      handleAction: () => handleCreateProfessional(),
+    },
+    editing: {
+      modalTitle: PROFESSIONAL_MODAL_TITLE_EDITING,
+      actionLabel: PROFESSIONAL_MODAL_ACTION_LABEL_EDITING,
+      pageTitle: PROFESSIONAL_PAGE_TITLE_EDITING,
+      handleAction: () => handleEditProfessional(),
+    },
+  };
+
+  const newProfessionalProps = {
+    name,
+    email,
+    cellphone,
+    nickname,
+    cnpj,
+    cpf,
+    pageTitle: modalActionsMapper[isUserEditingProfessional].pageTitle,
+  };
   const newProfessionalActions = {
     handleEmailChange,
     handleNameChange,
@@ -73,16 +112,66 @@ const Professionals = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllProfessionals());
-  }, [dispatch]);
+    dispatch(getAllProfessionalsAction());
+  }, []);
 
-  const handleSubmit = () => {
+  // TODO create a method and label object look up
+  const handleCreateProfessional = () => {
     try {
-      dispatch(addProfessional(newProfessionalProps));
+      dispatch(createProfessionalAction(newProfessionalProps));
       handleEmptyAfterSubmit();
       alert('Professional adicionado com sucesso!');
       setIsModalOpen(false);
     } catch (e) {}
+  };
+
+  const handleDeleteProfessional = documentId => {
+    try {
+      dispatch(deleteProfessionalAction(documentId));
+      alert('Professional deletado com sucesso!');
+    } catch (e) {}
+  };
+
+  const handleEditProfessional = () => {
+    try {
+      dispatch(
+        updateProfessionalAction({
+          professionalBeingEditedId,
+          newProfessionalProps,
+        })
+      );
+      alert('Professional editado com sucesso!');
+      setIsModalOpen(false);
+    } catch (e) {}
+  };
+
+  const handleOpenEditModal = professionalData => {
+    const { name, email, cellphone, nickname, cnpj, cpf, id } =
+      professionalData;
+    setProfessionalBeingEditedId(id);
+    setName(name);
+    setEmail(email);
+    setCellphone(cellphone);
+    setNickname(nickname);
+    setCnpj(cnpj);
+    setCpf(cpf);
+    setIsModalOpen(true);
+  };
+
+  const actionsCell = {
+    Header: () => null,
+    id: 'editor',
+    Cell: ({ row }) => {
+      return (
+        <span>
+          <RowActions
+            rowData={row}
+            handleDelete={handleDeleteProfessional}
+            handleEdit={handleOpenEditModal}
+          />
+        </span>
+      );
+    },
   };
 
   return (
@@ -90,10 +179,12 @@ const Professionals = props => {
       <Modal
         onModalClose={handleModalClose}
         isModalOpen={isModalOpen}
-        modalTitle={PROFESSIONAL_MODAL_TITLE}
         closeButtonLabel={PROFESSIONAL_MODAL_CANCEL}
-        actionLabel={PROFESSIONAL_MODAL_ACTION_LABEL}
-        handleAction={handleSubmit}
+        modalTitle={modalActionsMapper[isUserEditingProfessional].modalTitle}
+        actionLabel={modalActionsMapper[isUserEditingProfessional].actionLabel}
+        handleAction={
+          modalActionsMapper[isUserEditingProfessional].handleAction
+        }
       >
         <NewProfessional
           newProfessionalProps={newProfessionalProps}
@@ -120,7 +211,10 @@ const Professionals = props => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <Table columns={professionalsColumns} data={professionals} />
+        <Table
+          columns={[...professionalsColumns, actionsCell]}
+          data={professionals}
+        />
       )}
       <Flex justifyContent="space-between" w="98%" mt="32px">
         <Text>Mostrando de 1 até 10 de 6.079 registros</Text>

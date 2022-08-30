@@ -20,13 +20,12 @@ import {
   PRODUCT_ATTRIBUTES_LABEL,
   PRODUCT_ERROR,
   PRODUCT_TIPS_LABEL,
-  PRODUCT_PAGE_TITLE,
   CATEGORY_PLACEHOLDER,
 } from '../products.constants';
 
 const NewProduct = props => {
   const { newProductProps, newProductActions } = props;
-  const { description, price, category } = newProductProps;
+  const { description, price, category, pageTitle } = newProductProps;
   const { handleDescriptionChange, handlePriceChange, handleCategoryChange } =
     newProductActions;
 
@@ -38,7 +37,7 @@ const NewProduct = props => {
   return (
     <>
       <Heading w="auto" minW="512px" as="h1" size="lg">
-        {PRODUCT_PAGE_TITLE}
+        {pageTitle}
       </Heading>
       <Flex flexDir="column" minW="512px">
         <Flex marginTop="32px">

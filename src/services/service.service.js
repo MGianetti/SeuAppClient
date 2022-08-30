@@ -15,8 +15,8 @@ export const getAllServices = async () => {
   return allServices;
 };
 
-export const createService = async newUser => {
-  await addDoc(servicesCollection, newUser);
+export const createService = async newService => {
+  await addDoc(servicesCollection, newService);
 };
 
 export const deleteService = async serviceDocId => {

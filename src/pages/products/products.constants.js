@@ -1,14 +1,20 @@
 import { DEFAULT_TIP, DEFAULT_ERROR_MESSAGE_M } from '../pages.constants';
 
 export const PRODUCT_PAGE_TITLE = 'Novo produto:';
+export const PRODUCT_PAGE_TITLE_EDIT = 'Edite o produto';
+
+export const PRODUCT_MODAL_TITLE = 'Cadastre um novo produto';
+
+export const PRODUCT_MODAL_TITLE_EDITING = 'Editar produto:';
+export const PRODUCT_MODAL_ACTION_LABEL_EDITING = 'Salvar';
+
+export const PRODUCT_MODAL_ACTION_LABEL = 'Cadastrar';
 export const PRODUCT_PAGE_DESCRIPTION = 'Cadastre um novo produto.';
 export const VIEW_PRODUCTS_PAGE_TITLE = 'Produtos:';
 export const VIEW_PRODUCTS_DESCRIPTION = 'Consulta de produtos.';
 export const NEW_PRODUCT_BUTTON = 'Novo';
 
-export const PRODUCT_MODAL_TITLE = 'Cadastre um novo produto';
 export const PRODUCT_MODAL_CANCEL = 'Cancelar';
-export const PRODUCT_MODAL_ACTION_LABEL = 'Cadastrar';
 
 export const CATEGORY_PLACEHOLDER = 'Escolha uma categoria';
 export const SEARCH_PRODUCT_PLACEHOLDER = 'Buscar produto';

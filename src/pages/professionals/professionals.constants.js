@@ -5,6 +5,8 @@ import {
 } from '../pages.constants';
 
 export const PROFESSIONAL_PAGE_TITLE = 'Novo profissional:';
+export const PROFESSIONAL_PAGE_TITLE_EDITING = 'Editar profissional:';
+
 export const PROFESSIONAL_PAGE_DESCRIPTION = 'Cadastre um novo profissional.';
 export const VIEW_PROFESSIONALS_PAGE_TITLE = 'Profissionais:';
 export const VIEW_PROFESSIONALS_DESCRIPTION = 'Consulta de profissionais.';
@@ -16,6 +18,9 @@ export const SEX_PLACEHOLDER = 'Selecione o sexo';
 export const PROFESSIONAL_MODAL_TITLE = 'Cadastre um novo profissional';
 export const PROFESSIONAL_MODAL_CANCEL = 'Cancelar';
 export const PROFESSIONAL_MODAL_ACTION_LABEL = 'Cadastrar';
+
+export const PROFESSIONAL_MODAL_TITLE_EDITING = 'Edite o Profissional';
+export const PROFESSIONAL_MODAL_ACTION_LABEL_EDITING = 'Salvar';
 
 export const PROFESSIONAL_KEYS = Object.freeze({
   NAME: 'NAME',

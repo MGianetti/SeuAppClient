@@ -15,8 +15,8 @@ export const getAllClients = async () => {
   return allClients;
 };
 
-export const createClient = async newUser => {
-  await addDoc(clientsCollection, newUser);
+export const createClient = async newClient => {
+  await addDoc(clientsCollection, newClient);
 };
 
 export const deleteClient = async clientDocId => {
