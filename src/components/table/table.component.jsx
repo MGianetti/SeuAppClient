@@ -8,21 +8,23 @@ import {
   Th,
   Td,
   chakra,
+  Box,
   TableContainer,
 } from '@chakra-ui/react';
+
+import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 
 import { useTable, useSortBy } from 'react-table';
 
 function DataTable(props) {
   const { columns, data } = props;
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy);
+
+  const emptyMessage = 'Nenhum resultado encontrado';
+
+  const isThereRowsData = rows.length;
 
   return (
     <TableContainer
@@ -44,35 +46,41 @@ function DataTable(props) {
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   isNumeric={column.isNumeric}
                 >
-                  {column.render('Header')}
-                  <chakra.span pl="4">
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? '/\\'
-                        : '\\/'
-                      : null}
-                  </chakra.span>
+                  <Box display="flex">
+                    {column.render('Header')}
+                    <chakra.span pl="4">
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <FiArrowUp />
+                        ) : (
+                          <FiArrowDown />
+                        )
+                      ) : null}
+                    </chakra.span>
+                  </Box>
                 </Th>
               ))}
             </Tr>
           ))}
         </Thead>
         <Tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row);
-            return (
-              <Tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <Td
-                    {...cell.getCellProps()}
-                    isNumeric={cell.column.isNumeric}
-                  >
-                    {cell.render('Cell')}
-                  </Td>
-                ))}
-              </Tr>
-            );
-          })}
+          {isThereRowsData
+            ? rows.map(row => {
+                prepareRow(row);
+                return (
+                  <Tr {...row.getRowProps()}>
+                    {row.cells.map(cell => (
+                      <Td
+                        {...cell.getCellProps()}
+                        isNumeric={cell.column.isNumeric}
+                      >
+                        {cell.render('Cell')}
+                      </Td>
+                    ))}
+                  </Tr>
+                );
+              })
+            : emptyMessage}
         </Tbody>
       </Table>
     </TableContainer>
