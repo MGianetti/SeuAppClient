@@ -9,17 +9,14 @@ import {
   FormLabel,
   Heading,
   Input,
-  Select,
   Divider,
   Button,
 } from '@chakra-ui/react';
 
 import {
-  SIGNUP_KEYS,
+  SIGNUP_TIPS_LABEL,
+  SIGNUP_ERROR,
   SIGNUP_ATTRIBUTES_LABEL,
-  SIGNUP_EMAIL_PLACEHOLDER,
-  SIGNUP_PASSWORD_PLACEHOLDER,
-  SIGNUP_CONFIRM_PASSWORD_PLACEHOLDER,
 } from './signup.constants';
 
 import { useAuth } from '../../components/contexts/AuthContext';
@@ -80,7 +77,11 @@ const Signup = () => {
         <FormControl pt="32px" isRequired isInvalid={isErrorEmail}>
           <FormLabel>{SIGNUP_ATTRIBUTES_LABEL.EMAIL}</FormLabel>
           <Input type="email" value={email} onChange={handleChangeEmail} />
-          {isErrorEmail && <FormErrorMessage>{'Error'}</FormErrorMessage>}
+          {!isErrorEmail ? (
+            <FormHelperText>{SIGNUP_TIPS_LABEL.EMAIL}</FormHelperText>
+          ) : (
+            <FormErrorMessage>{SIGNUP_ERROR.EMAIL}</FormErrorMessage>
+          )}
         </FormControl>
         <FormControl pt="32px" isRequired isInvalid={isErrorPassWord}>
           <FormLabel>{SIGNUP_ATTRIBUTES_LABEL.PASSWORD}</FormLabel>
@@ -89,7 +90,11 @@ const Signup = () => {
             value={password}
             onChange={handleChangePassWord}
           />
-          {isErrorPassWord && <FormErrorMessage>{'Error'}</FormErrorMessage>}
+          {!isErrorPassWord ? (
+            <FormHelperText>{SIGNUP_TIPS_LABEL.PASSWORD}</FormHelperText>
+          ) : (
+            <FormErrorMessage>{SIGNUP_ERROR.PASSWORD}</FormErrorMessage>
+          )}
         </FormControl>
         <FormControl pt="32px" isRequired isInvalid={isErrorConfirmPassWord}>
           <FormLabel>{SIGNUP_ATTRIBUTES_LABEL.CONFIRM_PASSWORD}</FormLabel>
@@ -98,8 +103,12 @@ const Signup = () => {
             value={confirmPassWord}
             onChange={handleChangeConfirmPassWord}
           />
-          {isErrorConfirmPassWord && (
-            <FormErrorMessage>{'Error'}</FormErrorMessage>
+          {!isErrorConfirmPassWord ? (
+            <FormHelperText>
+              {SIGNUP_TIPS_LABEL.CONFIRM_PASSWORD}
+            </FormHelperText>
+          ) : (
+            <FormErrorMessage>{SIGNUP_ERROR.CONFIRM_PASSWORD}</FormErrorMessage>
           )}
         </FormControl>
         <Button

@@ -1,6 +1,7 @@
+import { DEFAULT_ERROR_MESSAGE_M } from '../pages.constants';
+
 export const SIGNUP_EMAIL_PLACEHOLDER = 'Digite seu email';
 export const SIGNUP_PASSWORD_PLACEHOLDER = 'Digite sua senha';
-export const SIGNUP_CONFIRM_PASSWORD_PLACEHOLDER = 'Confirme sua senha';
 
 export const SIGNUP_KEYS = Object.freeze({
   EMAIL: 'EMAIL',
@@ -11,51 +12,26 @@ export const SIGNUP_KEYS = Object.freeze({
 export const SIGNUP_ATTRIBUTES_LABEL = Object.freeze({
   [SIGNUP_KEYS.EMAIL]: 'Email',
   [SIGNUP_KEYS.PASSWORD]: 'Senha',
-  [SIGNUP_KEYS.CONFIRM_PASSWORD]: 'Confirmação de senha',
+  [SIGNUP_KEYS.CONFIRM_PASSWORD]: 'Confirme a senha',
 });
 
-// export const CLIENT_TIPS_LABEL = Object.freeze({
-//   [CLIENT_KEYS.NAME]: DEFAULT_TIP.replace(
-//     '{ATTRIBUTE}',
-//     CLIENT_ATTRIBUTES_LABEL.NAME.toLocaleLowerCase()
-//   ).replace('{ENTITY}', 'cliente'),
-//   [CLIENT_KEYS.EMAIL]: DEFAULT_TIP.replace(
-//     '{ATTRIBUTE}',
-//     CLIENT_ATTRIBUTES_LABEL.EMAIL.toLocaleLowerCase()
-//   ).replace('{ENTITY}', 'cliente'),
-//   [CLIENT_KEYS.CELLPHONE]: DEFAULT_TIP.replace(
-//     '{ATTRIBUTE}',
-//     CLIENT_ATTRIBUTES_LABEL.CELLPHONE.toLocaleLowerCase()
-//   ).replace('{ENTITY}', 'cliente'),
-//   [CLIENT_KEYS.SEX]: DEFAULT_TIP.replace(
-//     '{ATTRIBUTE}',
-//     CLIENT_ATTRIBUTES_LABEL.SEX.toLocaleLowerCase()
-//   ).replace('{ENTITY}', 'cliente'),
-//   [CLIENT_KEYS.AGE]: DEFAULT_TIP.replace(
-//     '{ATTRIBUTE}',
-//     CLIENT_ATTRIBUTES_LABEL.AGE.toLocaleLowerCase()
-//   ).replace('{ENTITY}', 'cliente'),
-// });
+export const SIGNUP_TIPS_LABEL = Object.freeze({
+  [SIGNUP_KEYS.EMAIL]: 'Digite seu email',
+  [SIGNUP_KEYS.PASSWORD]: 'Digite sua senha',
+  [SIGNUP_KEYS.CONFIRM_PASSWORD]: 'Confirme a sua senha',
+});
 
-// export const CLIENT_ERROR = Object.freeze({
-//   [CLIENT_KEYS.NAME]: DEFAULT_ERROR_MESSAGE_M.replace(
-//     '{ATTRIBUTE}',
-//     CLIENT_ATTRIBUTES_LABEL.NAME.toLocaleLowerCase()
-//   ),
-//   [CLIENT_KEYS.EMAIL]: DEFAULT_ERROR_MESSAGE_M.replace(
-//     '{ATTRIBUTE}',
-//     CLIENT_ATTRIBUTES_LABEL.EMAIL.toLocaleLowerCase()
-//   ),
-//   [CLIENT_KEYS.CELLPHONE]: DEFAULT_ERROR_MESSAGE_M.replace(
-//     '{ATTRIBUTE}',
-//     CLIENT_ATTRIBUTES_LABEL.CELLPHONE.toLocaleLowerCase()
-//   ),
-//   [CLIENT_KEYS.SEX]: DEFAULT_ERROR_MESSAGE_M.replace(
-//     '{ATTRIBUTE}',
-//     CLIENT_ATTRIBUTES_LABEL.SEX.toLocaleLowerCase()
-//   ),
-//   [CLIENT_KEYS.AGE]: INVALID_ERROR_MESSAGE_F.replace(
-//     '{ATTRIBUTE}',
-//     CLIENT_ATTRIBUTES_LABEL.AGE.toLocaleLowerCase()
-//   ),
-// });
+export const SIGNUP_ERROR = Object.freeze({
+  [SIGNUP_KEYS.EMAIL]: DEFAULT_ERROR_MESSAGE_M.replace(
+    '{ATTRIBUTE}',
+    SIGNUP_ATTRIBUTES_LABEL.EMAIL.toLowerCase()
+  ),
+  [SIGNUP_KEYS.PASSWORD]: DEFAULT_ERROR_MESSAGE_M.replace(
+    '{ATTRIBUTE}',
+    SIGNUP_ATTRIBUTES_LABEL.PASSWORD.toLowerCase()
+  ),
+  [SIGNUP_KEYS.CONFIRM_PASSWORD]: DEFAULT_ERROR_MESSAGE_M.replace(
+    '{ATTRIBUTE}',
+    SIGNUP_ATTRIBUTES_LABEL.CONFIRM_PASSWORD.toLowerCase()
+  ),
+});

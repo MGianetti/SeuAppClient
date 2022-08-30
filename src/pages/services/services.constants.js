@@ -1,4 +1,8 @@
-import { DEFAULT_TIP, DEFAULT_ERROR_MESSAGE_M } from '../pages.constants';
+import {
+  DEFAULT_TIP_MALE,
+  DEFAULT_ERROR_MESSAGE_M,
+  DEFAULT_TIP_MALE_FEMALE,
+} from '../pages.constants';
 
 export const SERVICE_PAGE_TITLE = 'Novo serviço:';
 export const SERVICE_PAGE_TITLE_EDITING = 'Editar serviço:';
@@ -27,11 +31,11 @@ export const SERVICE_ATTRIBUTES_LABEL = Object.freeze({
 });
 
 export const SERVICE_TIPS_LABEL = Object.freeze({
-  [SERVICE_KEYS.PRICE]: DEFAULT_TIP.replace(
+  [SERVICE_KEYS.PRICE]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     SERVICE_ATTRIBUTES_LABEL.PRICE.toLowerCase()
   ).replace('{ENTITY}', 'serviço'),
-  [SERVICE_KEYS.DESCRIPTION]: DEFAULT_TIP.replace(
+  [SERVICE_KEYS.DESCRIPTION]: DEFAULT_TIP_MALE_FEMALE.replace(
     '{ATTRIBUTE}',
     SERVICE_ATTRIBUTES_LABEL.DESCRIPTION.toLowerCase()
   ).replace('{ENTITY}', 'serviço'),

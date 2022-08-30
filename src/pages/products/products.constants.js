@@ -1,4 +1,9 @@
-import { DEFAULT_TIP, DEFAULT_ERROR_MESSAGE_M } from '../pages.constants';
+import {
+  DEFAULT_TIP_MALE,
+  DEFAULT_ERROR_MESSAGE_M,
+  DEFAULT_TIP_MALE_FEMALE,
+  DEFAULT_CHOOSE_TIP_FEMALE,
+} from '../pages.constants';
 
 export const PRODUCT_PAGE_TITLE = 'Novo produto:';
 export const PRODUCT_PAGE_TITLE_EDIT = 'Edite o produto';
@@ -32,15 +37,15 @@ export const PRODUCT_ATTRIBUTES_LABEL = Object.freeze({
 });
 
 export const PRODUCT_TIPS_LABEL = Object.freeze({
-  [PRODUCT_KEYS.PRICE]: DEFAULT_TIP.replace(
+  [PRODUCT_KEYS.PRICE]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     PRODUCT_ATTRIBUTES_LABEL.PRICE.toLocaleLowerCase()
   ).replace('{ENTITY}', 'produto'),
-  [PRODUCT_KEYS.CATEGORY]: DEFAULT_TIP.replace(
+  [PRODUCT_KEYS.CATEGORY]: DEFAULT_CHOOSE_TIP_FEMALE.replace(
     '{ATTRIBUTE}',
     PRODUCT_ATTRIBUTES_LABEL.CATEGORY.toLocaleLowerCase()
   ).replace('{ENTITY}', 'produto'),
-  [PRODUCT_KEYS.DESCRIPTION]: DEFAULT_TIP.replace(
+  [PRODUCT_KEYS.DESCRIPTION]: DEFAULT_TIP_MALE_FEMALE.replace(
     '{ATTRIBUTE}',
     PRODUCT_ATTRIBUTES_LABEL.DESCRIPTION.toLocaleLowerCase()
   ).replace('{ENTITY}', 'produto'),

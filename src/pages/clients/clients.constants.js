@@ -1,7 +1,8 @@
 import {
-  DEFAULT_TIP,
+  DEFAULT_TIP_MALE,
   DEFAULT_ERROR_MESSAGE_M,
   INVALID_ERROR_MESSAGE_F,
+  DEFAULT_CHOOSE_TIP_MALE,
 } from '../pages.constants';
 
 export const CLIENT_PAGE_TITLE = 'Novo cliente:';
@@ -39,23 +40,23 @@ export const CLIENT_ATTRIBUTES_LABEL = Object.freeze({
 });
 
 export const CLIENT_TIPS_LABEL = Object.freeze({
-  [CLIENT_KEYS.NAME]: DEFAULT_TIP.replace(
+  [CLIENT_KEYS.NAME]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     CLIENT_ATTRIBUTES_LABEL.NAME.toLocaleLowerCase()
   ).replace('{ENTITY}', 'cliente'),
-  [CLIENT_KEYS.EMAIL]: DEFAULT_TIP.replace(
+  [CLIENT_KEYS.EMAIL]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     CLIENT_ATTRIBUTES_LABEL.EMAIL.toLocaleLowerCase()
   ).replace('{ENTITY}', 'cliente'),
-  [CLIENT_KEYS.CELLPHONE]: DEFAULT_TIP.replace(
+  [CLIENT_KEYS.CELLPHONE]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     CLIENT_ATTRIBUTES_LABEL.CELLPHONE.toLocaleLowerCase()
   ).replace('{ENTITY}', 'cliente'),
-  [CLIENT_KEYS.SEX]: DEFAULT_TIP.replace(
+  [CLIENT_KEYS.SEX]: DEFAULT_CHOOSE_TIP_MALE.replace(
     '{ATTRIBUTE}',
     CLIENT_ATTRIBUTES_LABEL.SEX.toLocaleLowerCase()
   ).replace('{ENTITY}', 'cliente'),
-  [CLIENT_KEYS.AGE]: DEFAULT_TIP.replace(
+  [CLIENT_KEYS.AGE]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     CLIENT_ATTRIBUTES_LABEL.AGE.toLocaleLowerCase()
   ).replace('{ENTITY}', 'cliente'),

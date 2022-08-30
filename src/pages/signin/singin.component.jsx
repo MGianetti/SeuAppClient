@@ -5,21 +5,18 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
-  FormHelperText,
   FormLabel,
   Heading,
   Input,
-  Select,
   Divider,
   Button,
+  FormHelperText,
 } from '@chakra-ui/react';
 
 import {
-  SIGNUP_KEYS,
-  SIGNUP_ATTRIBUTES_LABEL,
-  SIGNUP_EMAIL_PLACEHOLDER,
-  SIGNUP_PASSWORD_PLACEHOLDER,
-  SIGNUP_CONFIRM_PASSWORD_PLACEHOLDER,
+  SIGNIN_ATTRIBUTES_LABEL,
+  SIGNIN_ERROR,
+  SIGNIN_TIPS_LABEL,
 } from './signin.constants';
 
 import { useAuth } from '../../components/contexts/AuthContext';
@@ -71,18 +68,26 @@ const Signin = () => {
       </Heading>
       <Flex flexDir="column" w="100%" minW="256px">
         <FormControl pt="32px" isRequired isInvalid={isErrorEmail}>
-          <FormLabel>{SIGNUP_ATTRIBUTES_LABEL.EMAIL}</FormLabel>
+          <FormLabel>{SIGNIN_ATTRIBUTES_LABEL.EMAIL}</FormLabel>
           <Input type="email" value={email} onChange={handleChangeEmail} />
-          {isErrorEmail && <FormErrorMessage>{'Error'}</FormErrorMessage>}
+          {!isErrorEmail ? (
+            <FormHelperText>{SIGNIN_TIPS_LABEL.EMAIL}</FormHelperText>
+          ) : (
+            <FormErrorMessage>{SIGNIN_ERROR.EMAIL}</FormErrorMessage>
+          )}
         </FormControl>
         <FormControl pt="32px" isRequired isInvalid={isErrorPassWord}>
-          <FormLabel>{SIGNUP_ATTRIBUTES_LABEL.PASSWORD}</FormLabel>
+          <FormLabel>{SIGNIN_ATTRIBUTES_LABEL.PASSWORD}</FormLabel>
           <Input
             type="password"
             value={password}
             onChange={handleChangePassWord}
           />
-          {isErrorPassWord && <FormErrorMessage>{'Error'}</FormErrorMessage>}
+          {!isErrorPassWord ? (
+            <FormHelperText>{SIGNIN_TIPS_LABEL.PASSWORD}</FormHelperText>
+          ) : (
+            <FormErrorMessage>{SIGNIN_ERROR.PASSWORD}</FormErrorMessage>
+          )}
         </FormControl>
         <Button
           m="32px 0"

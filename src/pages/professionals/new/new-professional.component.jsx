@@ -12,13 +12,13 @@ import {
 import {
   PROFESSIONAL_ATTRIBUTES_LABEL,
   PROFESSIONAL_ERROR,
-  PROFESSIONAL_PAGE_TITLE,
   PROFESSIONAL_TIPS_LABEL,
 } from '../professionals.constants';
 
 function NewProfessional(props) {
   const { newProfessionalProps, newProfessionalActions } = props;
-  const { name, nickname, cpf, cnpj, cellphone, email } = newProfessionalProps;
+  const { name, nickname, cpf, cnpj, cellphone, email, pageTitle } =
+    newProfessionalProps;
   const {
     handleNameChange,
     handleNicknameChange,
@@ -39,7 +39,7 @@ function NewProfessional(props) {
   return (
     <>
       <Heading w="auto" minW="512px" as="h1" size="lg">
-        {PROFESSIONAL_PAGE_TITLE}
+        {pageTitle}
       </Heading>
       <Flex flexDir="column" minW="512px">
         <Flex marginTop="32px">

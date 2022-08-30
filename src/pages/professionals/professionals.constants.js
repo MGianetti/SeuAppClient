@@ -1,5 +1,5 @@
 import {
-  DEFAULT_TIP,
+  DEFAULT_TIP_MALE,
   DEFAULT_ERROR_MESSAGE_M,
   INVALID_ERROR_MESSAGE_F,
 } from '../pages.constants';
@@ -41,27 +41,27 @@ export const PROFESSIONAL_ATTRIBUTES_LABEL = Object.freeze({
 });
 
 export const PROFESSIONAL_TIPS_LABEL = Object.freeze({
-  [PROFESSIONAL_KEYS.NAME]: DEFAULT_TIP.replace(
+  [PROFESSIONAL_KEYS.NAME]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     PROFESSIONAL_ATTRIBUTES_LABEL.NAME.toLocaleLowerCase()
   ).replace('{ENTITY}', 'profissional'),
-  [PROFESSIONAL_KEYS.NICK_NAME]: DEFAULT_TIP.replace(
+  [PROFESSIONAL_KEYS.NICK_NAME]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     PROFESSIONAL_ATTRIBUTES_LABEL.NICK_NAME.toLocaleLowerCase()
   ).replace('{ENTITY}', 'profissional'),
-  [PROFESSIONAL_KEYS.CPF]: DEFAULT_TIP.replace(
+  [PROFESSIONAL_KEYS.CPF]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     PROFESSIONAL_ATTRIBUTES_LABEL.CPF.toLocaleLowerCase()
   ).replace('{ENTITY}', 'profissional'),
-  [PROFESSIONAL_KEYS.CNPJ]: DEFAULT_TIP.replace(
+  [PROFESSIONAL_KEYS.CNPJ]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     PROFESSIONAL_ATTRIBUTES_LABEL.CNPJ.toLocaleLowerCase()
   ).replace('{ENTITY}', 'profissional'),
-  [PROFESSIONAL_KEYS.CELLPHONE]: DEFAULT_TIP.replace(
+  [PROFESSIONAL_KEYS.CELLPHONE]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     PROFESSIONAL_ATTRIBUTES_LABEL.CELLPHONE.toLocaleLowerCase()
   ).replace('{ENTITY}', 'profissional'),
-  [PROFESSIONAL_KEYS.EMAIL]: DEFAULT_TIP.replace(
+  [PROFESSIONAL_KEYS.EMAIL]: DEFAULT_TIP_MALE.replace(
     '{ATTRIBUTE}',
     PROFESSIONAL_ATTRIBUTES_LABEL.EMAIL.toLocaleLowerCase()
   ).replace('{ENTITY}', 'profissional'),
