@@ -30,7 +30,6 @@ import {
   addService,
   fetchAllServices,
 } from '../../store/services/servicesSlice';
-import { getAll } from '../../services/service.service';
 
 function Services(props) {
   const { services, isLoading } = props;
@@ -57,7 +56,7 @@ function Services(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllServices(getAll()));
+    dispatch(fetchAllServices());
   }, [dispatch]);
 
   const handleSubmit = () => {

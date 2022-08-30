@@ -13,27 +13,38 @@ import {
 import { FiPlus } from 'react-icons/fi';
 
 import NewClient from './new';
-import { Pagination, Table, Modal } from '../../components';
+import { Pagination, Table, Modal, RowActions } from '../../components';
 
 import {
+  CLIENT_MODAL_ACTION_LABEL_EDITING,
+  CLIENT_MODAL_ACTION_LABEL,
+  CLIENT_MODAL_CANCEL,
+  CLIENT_MODAL_TITLE_EDITING,
+  CLIENT_MODAL_TITLE,
+  clientColumn,
   NEW_CLIENT_BUTTON,
+  SEARCH_CLIENT_PLACEHOLDER,
   VIEW_CLIENTS_DESCRIPTION,
   VIEW_CLIENTS_PAGE_TITLE,
-  CLIENT_MODAL_TITLE,
-  CLIENT_MODAL_CANCEL,
-  CLIENT_MODAL_ACTION_LABEL,
-  SEARCH_CLIENT_PLACEHOLDER,
-  clientColumn,
+  CLIENT_PAGE_TITLE,
+  CLIENT_PAGE_TITLE_EDIT,
 } from './clients.constants';
 
-import { fetchAllClients, addClient } from '../../store/clients/clientsSlice';
-import { getAll } from '../../services/client.service';
+import {
+  getAllClientsAction,
+  createClientAction,
+  deleteClientAction,
+  updateClientAction,
+} from '../../store/clients/clientsSlice';
 
 function Clients(props) {
   const { clients, isLoading } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleModalClose = () => setIsModalOpen(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    handleEmptyAfterSubmit();
+  };
   const handleModalOpen = () => setIsModalOpen(true);
 
   const [name, setName] = useState('');
@@ -44,14 +55,41 @@ function Clients(props) {
   const handleNameChange = e => setName(e.target.value);
   const handleCellphoneChange = e => setCellphone(e.target.value);
   const handleSexChange = e => setSex(e.target.value);
+
+  const [clientBeingEditedId, setClientBeingEditedId] = useState('');
+  const isUserEditingClient =
+    clientBeingEditedId === '' ? 'creating' : 'editing';
+
   const handleEmptyAfterSubmit = () => {
     setName('');
     setEmail('');
     setCellphone('');
     setSex('');
+    setClientBeingEditedId('');
   };
 
-  const newClientProps = { name, email, cellphone, sex };
+  const modalActionsMapper = {
+    creating: {
+      modalTitle: CLIENT_MODAL_TITLE,
+      actionLabel: CLIENT_MODAL_ACTION_LABEL,
+      pageTitle: CLIENT_PAGE_TITLE,
+      handleAction: () => handleCreateClient(),
+    },
+    editing: {
+      modalTitle: CLIENT_MODAL_TITLE_EDITING,
+      actionLabel: CLIENT_MODAL_ACTION_LABEL_EDITING,
+      pageTitle: CLIENT_PAGE_TITLE_EDIT,
+      handleAction: () => handleEditClient(),
+    },
+  };
+
+  const newClientProps = {
+    name,
+    email,
+    cellphone,
+    sex,
+    pageTitle: modalActionsMapper[isUserEditingClient].pageTitle,
+  };
   const newClientActions = {
     handleEmailChange,
     handleNameChange,
@@ -62,16 +100,58 @@ function Clients(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllClients(getAll()));
-  }, [dispatch]);
+    dispatch(getAllClientsAction());
+  }, []);
 
-  const handleSubmit = () => {
+  // TODO create a method and label object look up
+  const handleCreateClient = () => {
     try {
-      dispatch(addClient(newClientProps));
+      dispatch(createClientAction(newClientProps));
       handleEmptyAfterSubmit();
       alert('Cliente adicionado com sucesso!');
       setIsModalOpen(false);
     } catch (e) {}
+  };
+
+  const handleDeleteClient = documentId => {
+    try {
+      dispatch(deleteClientAction(documentId));
+      alert('Cliente deletado com sucesso!');
+    } catch (e) {}
+  };
+
+  const handleEditClient = () => {
+    try {
+      dispatch(updateClientAction({ clientBeingEditedId, newClientProps }));
+      alert('Cliente editado com sucesso!');
+      setIsModalOpen(false);
+    } catch (e) {}
+  };
+
+  const handleOpenEditModal = clientData => {
+    const { name, email, cellphone, sex, id } = clientData;
+    setClientBeingEditedId(id);
+    setName(name);
+    setEmail(email);
+    setCellphone(cellphone);
+    setSex(sex);
+    setIsModalOpen(true);
+  };
+
+  const actionsCell = {
+    Header: () => null,
+    id: 'editor',
+    Cell: ({ row }) => {
+      return (
+        <span>
+          <RowActions
+            rowData={row}
+            handleDelete={handleDeleteClient}
+            handleEdit={handleOpenEditModal}
+          />
+        </span>
+      );
+    },
   };
 
   return (
@@ -79,10 +159,10 @@ function Clients(props) {
       <Modal
         onModalClose={handleModalClose}
         isModalOpen={isModalOpen}
-        modalTitle={CLIENT_MODAL_TITLE}
+        modalTitle={modalActionsMapper[isUserEditingClient].modalTitle}
         closeButtonLabel={CLIENT_MODAL_CANCEL}
-        actionLabel={CLIENT_MODAL_ACTION_LABEL}
-        handleAction={handleSubmit}
+        actionLabel={modalActionsMapper[isUserEditingClient].actionLabel}
+        handleAction={modalActionsMapper[isUserEditingClient].handleAction}
       >
         <NewClient
           newClientProps={newClientProps}
@@ -109,7 +189,7 @@ function Clients(props) {
       {isLoading ? (
         <Spinner />
       ) : (
-        <Table columns={clientColumn} data={clients} />
+        <Table columns={[...clientColumn, actionsCell]} data={clients} />
       )}
       <Flex justifyContent="space-between" w="98%" mt="32px">
         <Text>Mostrando de 1 até 10 de 6.079 registros</Text>

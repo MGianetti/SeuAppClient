@@ -6,3 +6,4 @@ export * from './side-menu';
 export * from './table';
 export * from './pagination';
 export * from './modal';
+export * from './row-actions';

@@ -30,8 +30,6 @@ import {
   addProfessional,
   fetchAllProfessionals,
 } from '../../store/professionals/professionalsSlice';
-import { getAll } from '../../services/professional.service';
-
 const Professionals = props => {
   const { professionals, isLoading } = props;
 
@@ -75,7 +73,7 @@ const Professionals = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllProfessionals(getAll()));
+    dispatch(fetchAllProfessionals());
   }, [dispatch]);
 
   const handleSubmit = () => {

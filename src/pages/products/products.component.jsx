@@ -31,7 +31,6 @@ import {
   fetchAllProducts,
   addProduct,
 } from '../../store/products/productsSlice';
-import { getAll } from '../../services/product.service';
 
 function Products(props) {
   const { products, isLoading } = props;
@@ -63,7 +62,7 @@ function Products(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllProducts(getAll()));
+    dispatch(fetchAllProducts());
   }, [dispatch]);
 
   const handleSubmit = () => {

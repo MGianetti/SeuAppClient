@@ -11,7 +11,6 @@ import {
   Select,
 } from '@chakra-ui/react';
 import {
-  CLIENT_PAGE_TITLE,
   CLIENT_ATTRIBUTES_LABEL,
   CLIENT_TIPS_LABEL,
   CLIENT_ERROR,
@@ -21,7 +20,7 @@ import {
 
 const NewClient = props => {
   const { newClientProps, newClientActions } = props;
-  const { name, email, cellphone, sex } = newClientProps;
+  const { name, email, cellphone, sex, pageTitle } = newClientProps;
   const {
     handleEmailChange,
     handleNameChange,
@@ -38,7 +37,7 @@ const NewClient = props => {
   return (
     <>
       <Heading w="auto" minW="512px" as="h1" size="lg">
-        {CLIENT_PAGE_TITLE}
+        {pageTitle}
       </Heading>
       <Flex flexDir="column" w="auto" minW="512px">
         <Flex marginTop="32px">
